@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warm-up</title>
+    <style>
+        div {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        const allDivs = document.querySelectorAll('div');
+        let numberOfClicks = 0;
+
+        function reset () {
+            for (const div of allDivs) {
+                div.style.backgroundColor = 'green';
+            }
+        }
+
+        for (const div of allDivs) {
+            div.addEventListener('click',function () {
+                numberOfClicks++;
+                if (numberOfClicks >= allDivs.length) {
+                   reset();
+                }
+                else {
+                    div.style.backgroundColor = 'red';
+                }
+            })
+        }
+    </script>
+</body>
+</html>

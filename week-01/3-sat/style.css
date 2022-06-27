@@ -1,0 +1,30 @@
+#title{
+    text-align: center;
+    background-color: grey;
+}
+#quotes{
+  text-align: left;
+  width:50%;
+  top:25%;
+}
+.column{
+  display: table-cell;
+  width:50%;
+  text-align: justify;
+  padding: 0 20px;
+}
+#asides{
+  display: table;
+  width: 100%;
+}
+.tiptext {
+  color:#069; 
+  cursor:pointer;
+}
+.description {
+  display:none;
+  position:absolute;
+  border:1px solid #000;
+  width:400px;
+  height:400px;
+}

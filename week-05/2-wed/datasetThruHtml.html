@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <ul id = 'list' data-name = 'meats'>
+
+    </ul>
+
+    <script>
+        const meats = ['beef','lamb','pork','chicken'];
+        for (const meat of meats) {
+            const li = document.createElement('li');
+            li.textContent = meat;
+            document.querySelector('#list').appendChild(li);
+            console.log(document.getElementById('list').dataset.name); 
+
+            const button = document.createElement('button');
+            button.textContent = 'Delete';
+            button.addEventListener('click',deleteLi);
+            li.appendChild(button);
+            function deleteLi(e) {
+                // the statement below eliminates the need of
+                // a dependent function that has li.remove
+                // you can use the function above outside as well
+                e.target.parentElement.remove();
+                // li.remove();
+            }
+        }
+
+        // function deleteLi(e) {
+        //         // the statement below eliminates the need of
+        //         // a dependent function that has li.remove
+        //         // you can use the function above outside as well
+        //         e.target.parentElement.remove();
+        //         // li.remove();
+        //     }
+
+        // cannot use function outside like below
+        // because li is a 
+        // function deleteLi() {
+        //     li.remove();
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>What year is it?</title>
+    </head>
+    <body>
+        <script>
+            const userInput = Number(prompt("Enter year -"));
+            if (isNaN(userInput)) {
+                console.log("Please enter valid number");
+                userInput=Number(prompt("Enter year - number this time please! - "));
+            }
+            else {
+                if (userInput === 2022) {
+                    console.log("I'm in the present!");
+                }
+                else if (userInput < 2022) {
+                    console.log("Blast from the past!");
+                }
+                else {
+                    console.log("Greetings from the future!");
+                }
+            }
+        </script>
+    </body>
+</html>

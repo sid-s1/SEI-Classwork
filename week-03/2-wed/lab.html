@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>CW Lab!</title>
+    </head>
+    <body>
+        <script>
+            function howMuchLand(length,width) {
+                const area = (length * width) + "sq.m.";
+                return area;
+            }
+            console.log(howMuchLand(30,20));
+
+            function helloIn(name) {
+                if (name === "English") {
+                    return "Hello";
+                }
+                else if (name === "German") {
+                    return "Hallo";
+                }
+                else if (name === "Chinese") {
+                    return "你好";
+                }
+                else if (name === "French") {
+                    return "Bonjour";
+                }
+                else {
+                    return "Sorry, I don't speak "+name+".";
+                }
+            }
+            console.log(helloIn("Latin"));
+
+            function filledArray(word,numb) {
+                const newArr = [];
+                if (numb >= 0) {
+                    for (let i=0;i<numb;i++) {
+                        newArr.push(word);
+                    }
+                    return newArr;
+                }
+                else {
+                    return "Enter something reasonable yo!";
+                }
+            }
+            console.log(filledArray("something",0));
+
+            function intersection(arr1,arr2) {
+                const newArr = [];
+                for (const word of arr1) {
+                    for (const word2 of arr2) {
+                        if (word.match(word2)) {
+                            newArr.push(word);
+                        }
+                    }
+                }
+                return newArr;
+            }
+            console.log(intersection(['a', 'b', 'c'], ['c', 'b', 'a']));
+
+            function dedupe(arr) {
+                const newArr = [];
+                for (word of arr) {
+                    if (!newArr.includes(word)) {
+                        newArr.push(word);
+                    }
+                }
+                return newArr;
+            }
+            console.log(dedupe(['hello', 'I', 'say', 'hello', 'cat', 'cat']));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+ <html>
+     <head>
+         <title>Movie + Year</title>
+         <style>
+             span{
+                 color:rgb(136, 53, 196);
+             }
+         </style>
+     </head>
+     <body>
+        <p> 
+            The movie <span id="name"> </span> was released in <span id="year"> </span>! That was <span id="number"> </span> years ago!
+        </p>
+        <!--
+            Below button added on "Pedro Lobbito"'s suggestion on StackOverflow
+        -->
+        <button onClick="window.location.reload();">Refresh Page</button>
+        <script>
+            const movieName=prompt("Enter name of movie");
+            const movieYear=prompt("Enter year the movie was released");
+            const numberOfYears=2022-movieYear;
+            if(isNaN(movieYear)){
+                document.querySelector("p").textContent="Enter valid year please!";
+            }
+            else{
+            document.getElementById("name").textContent=movieName;
+            document.getElementById("year").textContent=movieYear;
+            document.getElementById("number").textContent=numberOfYears;
+            }
+        </script>
+     </body>
+ </html>

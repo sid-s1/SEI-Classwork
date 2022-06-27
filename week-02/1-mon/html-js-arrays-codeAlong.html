@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>HTML-DOM Code Along</title>
+    </head>
+    <body>
+        Hello hello yes yes
+        <div>
+            <p>I am here, yes I am announcing my presence</p>
+        </div>
+        <script>
+            //red cross
+            //track the volunteers
+            //two ways to create arrays
+
+            //one
+            const volunteers=["sid","sidi","siddii"];
+
+            //two - new is a keyword that helps us declare a list of Array data-type
+            const volunteersAlternative=new Array("sid","sidi","siddidi");
+
+            //to remove last element from array
+            volunteers.pop();
+            
+            //to add element at the end of the array
+            volunteersAlternative.push("siddii");
+
+            //for loop that goes through each element of our array - WAY 1
+
+            for (let i=0;i<volunteersAlternative.length;i++){
+                console.log(volunteersAlternative[i]);
+            }
+
+            //for loop that goes through each element of our array - WAY 2
+
+            for (const volunteer of volunteersAlternative){
+                console.log(volunteer);
+            }
+
+            //for loop that goes through each element of our array - WAY 3
+
+            for (const volunteerID in volunteersAlternative){
+                console.log(volunteerID);
+            }
+        </script>
+    </body>
+</html>

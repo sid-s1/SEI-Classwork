@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Warm-up</title>
+        <style>
+            h1 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Click-counter yo!</h1>
+        <button id='clickMe'>Click me!</button>
+        <section id='counters'>
+            <p id='content'></p>
+        </section>
+        <script>
+            let numberToDisplay = 0;
+            let numberOfCookies = 0;
+            document.querySelector('#clickMe').addEventListener('click',printCounter);
+            function printCounter() {
+                numberToDisplay++;
+                const paraElement = document.querySelector('#content');
+                switch (true) {
+                    case numberToDisplay === 1:
+                        paraElement.textContent = 'You have 1 click';
+                        break;
+                    case numberToDisplay === 5:
+                        paraElement.textContent = `You have ${numberToDisplay} clicks`;
+                        if (!(document.querySelector('.cookieButton'))) {
+                            const newButton = document.createElement('button');
+                            newButton.classList.add('cookieButton');
+                            newButton.textContent = `Buy a cookie for 5 clicks`;
+                            document.querySelector('#counters').appendChild(newButton);
+                            newButton.addEventListener('click', function () {
+                                numberToDisplay -= 5;
+                                paraElement.textContent = `You have ${numberToDisplay} clicks`;
+                                numberOfCookies++;
+                                switch (numberOfCookies) {
+                                    case 1:
+                                        newCounter.textContent = `You have 1 cookie`;
+                                        break;
+                                    default:
+                                        newCounter.textContent = `You have ${numberOfCookies} cookies`;
+                                        break;
+                                }
+                            })
+                        }
+                        const newCounter = document.createElement('p');
+                        document.querySelector('#counters').appendChild(newCounter);
+                        break;
+                    default:
+                        paraElement.textContent = `You have ${numberToDisplay} clicks`;
+                        break;
+                }
+            }
+        </script>
+    </body>
+</html>

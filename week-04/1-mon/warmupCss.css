@@ -1,0 +1,21 @@
+h1,nav,section,footer {
+    margin: 0 auto;
+    text-align: center;
+}
+header {
+    display: inline-block;
+}
+header img {
+    margin: 0 auto;
+    width: 10%;
+    height: auto;
+}
+aside {
+    float: right;
+    border: solid 2px black;
+    padding: 5px;
+    text-align: center;
+}
+div {
+    display: inline;
+}

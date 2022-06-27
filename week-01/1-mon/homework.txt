@@ -1,0 +1,94 @@
+Last login: Mon May  9 19:34:25 on ttys000
+sid@Siddharths-MBP ~ % ls
+Applications	Desktop		Library		Pictures
+Calibre Library	Documents	Movies		Public
+Courses		Downloads	Music
+sid@Siddharths-MBP ~ % cd Courses
+sid@Siddharths-MBP Courses % ls
+2021	GA SEI
+sid@Siddharths-MBP Courses % cd "GA SEI"
+sid@Siddharths-MBP GA SEI % ls
+GA_Student_Enrollment_Agreement.pdf	SEiFXR08ANZ Orientation.pptx
+SEI_Syllabi_latest-2022.pdf		git-practice
+SEiFXR08ANZ Orientation.pdf		sei-course
+sid@Siddharths-MBP GA SEI % cd sei-course
+sid@Siddharths-MBP sei-course % ls
+classwork	project-1	project-2	project-3	project-4
+sid@Siddharths-MBP sei-course % cd classwork
+sid@Siddharths-MBP classwork % ls
+unit-1	unit-2	unit-3	unit-4
+sid@Siddharths-MBP classwork % cd unit-1
+sid@Siddharths-MBP unit-1 % ls
+lesson-01-1	lesson-01-3	lesson-02-2	lesson-03-1	lesson-03-3
+lesson-01-2	lesson-02-1	lesson-02-3	lesson-03-2
+sid@Siddharths-MBP unit-1 % cd lesson-01-1
+sid@Siddharths-MBP lesson-01-1 % ls
+bloodborne.jpeg		trial-javascript.js
+style-for-trial.css	trial.html
+sid@Siddharths-MBP lesson-01-1 % mkdir homework
+sid@Siddharths-MBP lesson-01-1 % ls
+bloodborne.jpeg		style-for-trial.css	trial.html
+homework		trial-javascript.js
+sid@Siddharths-MBP lesson-01-1 % cd homework
+sid@Siddharths-MBP homework % mkdir House
+sid@Siddharths-MBP homework % touch Dorothy Toto
+sid@Siddharths-MBP homework % ls
+Dorothy	House	Toto
+sid@Siddharths-MBP homework % rm Dorothy Toto
+sid@Siddharths-MBP homework % ls
+House
+sid@Siddharths-MBP homework % cd House
+sid@Siddharths-MBP House % ls
+sid@Siddharths-MBP House % touch Dorothy Toto
+sid@Siddharths-MBP House % cd ..
+sid@Siddharths-MBP homework % ls
+House
+sid@Siddharths-MBP homework % mkdir Oz
+sid@Siddharths-MBP homework % cd Oz
+sid@Siddharths-MBP Oz % touch "Good Witch of the North" "Wicked Witch of the Eas
+t" "Good Witch of the South" "Wicked Witch of the West"
+sid@Siddharths-MBP Oz % ls
+Good Witch of the North		Wicked Witch of the East
+Good Witch of the South		Wicked Witch of the West
+sid@Siddharths-MBP Oz % rm "Wicked Witch of the East"
+sid@Siddharths-MBP Oz % ls
+Good Witch of the North		Wicked Witch of the West
+Good Witch of the South
+sid@Siddharths-MBP Oz % cd ..
+sid@Siddharths-MBP homework % cd House
+sid@Siddharths-MBP House % ls
+Dorothy	Toto
+sid@Siddharths-MBP House % cd ..
+sid@Siddharths-MBP homework % mv /Users/sid/Courses/GA SEI/sei-course/classwork/unit-1/lesson-01-1/homework/House/Dorothy /Users/sid/Courses/GA SEI/sei-course/classwork/unit-1/lesson-01-1/homework/Oz
+mv: SEI/sei-course/classwork/unit-1/lesson-01-1/homework/Oz is not a directory
+sid@Siddharths-MBP homework % mv /Users/sid/Courses/"GA SEI"/sei-course/classwork/unit-1/lesson-01-1/homework/House/Dorothy /Users/sid/Courses/"GA SEI"/sei-course/classwork/unit-1/lesson-01-1/homework/Oz
+sid@Siddharths-MBP homework % ls
+House	Oz
+sid@Siddharths-MBP homework % cd Oz
+sid@Siddharths-MBP Oz % ls
+Dorothy				Good Witch of the South
+Good Witch of the North		Wicked Witch of the West
+sid@Siddharths-MBP Oz % cd ..
+sid@Siddharths-MBP homework % touch Scarecrow "Tin Man" "Cowardly Lion"
+sid@Siddharths-MBP homework % mkdir "Emerald City"
+sid@Siddharths-MBP homework % mv Scarecrow "Tin Man" "Cowardly Lion" "Emerald Ci
+ty"/
+sid@Siddharths-MBP homework % cd "Emerald City"
+sid@Siddharths-MBP Emerald City % ls
+Cowardly Lion	Scarecrow	Tin Man
+sid@Siddharths-MBP Emerald City % cd ..
+sid@Siddharths-MBP homework % cd Oz
+sid@Siddharths-MBP Oz % ls
+Dorothy				Good Witch of the South
+Good Witch of the North		Wicked Witch of the West
+sid@Siddharths-MBP Oz % touch "Flying Monkeys"
+sid@Siddharths-MBP Oz % rm "Wicked Witch of the West"
+sid@Siddharths-MBP Oz % ls
+Dorothy			Good Witch of the North
+Flying Monkeys		Good Witch of the South
+sid@Siddharths-MBP Oz % cd ..
+sid@Siddharths-MBP homework % echo "a diploma" >> "Emerald City"/Scarecrow
+sid@Siddharths-MBP homework % echo "a heart shaped watch" >> "Emerald City"/"Tin
+ Man"
+sid@Siddharths-MBP homework % echo "a medal" >> "Emerald City"/"Cowardly Lion"
+sid@Siddharths-MBP homework %

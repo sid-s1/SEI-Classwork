@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>Lab-1!</title>
+    </head>
+    <body>
+        <script>
+            function timeConverter(time) {
+                let hour = "";
+                let minute = "";
+                let second = "";
+                let meridian = time.substring(time.length-2,time.length);
+                const indexesOfColons = [];
+                for (let index in time) {
+                    if (time[index] === ":") {
+                        indexesOfColons.push(index);
+                    }
+                }
+                hour = hour + time.substring(0,parseInt(indexesOfColons[0]));
+                minute = minute + time.substring(parseInt(indexesOfColons[0]) + 1,parseInt(indexesOfColons[1]));
+                second = second + time.substring(parseInt(indexesOfColons[1]) + 1,time.length - 2);
+                if (meridian === "AM" || meridian === "am") {
+                    if (hour === "12") {
+                        return "00" + ":" + minute + ":" + second;
+                    }
+                    else {
+                        return hour + ":" + minute + ":" + second;
+                    }
+                }
+                else if (meridian === "PM" || meridian === "pm") {
+                    if (hour === "12") {
+                        return hour + ":" + minute + ":" + second;
+                    }
+                    else {
+                        return (parseInt(hour) + 12) + ":" + minute + ":" + second;
+                    }
+                }
+                else {
+                    return "Please enter AM or PM!";
+                }
+            }
+            console.log(timeConverter('07:05:45AM'));
+            console.log(timeConverter('07:05:45PM'));
+            console.log(timeConverter('12:01:00PM'));
+            console.log(timeConverter('12:01:00AM'));
+
+            function removeDuplicates(str) {
+                str = str + " ";
+                let word = "";
+                let newStr = "";
+                const listOfWords = {};
+                for (let index in str) {
+                    if (str[index] !== " ") {
+                        word = word + str[index];
+                    }
+                    else {
+                        if (listOfWords[word] !== undefined) {
+                            listOfWords[word]++;
+                        }
+                        else {
+                            listOfWords[word] = 1;
+                        }
+                        word = "";
+                    }
+                }
+                for (const key in listOfWords) {
+                    newStr = newStr + key + " ";
+                }
+                console.log(newStr.substring(0,newStr.length - 1));
+            }
+            removeDuplicates("the cat sat on the mat on the other cat");
+            removeDuplicates("alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta");
+
+            const forecastInfo = {
+                    Monday: {
+                        temperature: 20,
+                        rain: 12
+                    },
+                    Tuesday: {
+                        temperature: 25,
+                        rain: 6
+                    },
+                    Wednesday: {
+                        temperature: 27,
+                        rain: 24
+                    },
+                    Thursday: {
+                        temperature: 32,
+                        rain: 65
+                    },
+                    Friday: {
+                        temperature: 18,
+                        rain: 2
+                    },
+                    Saturday: {
+                        temperature: 26,
+                        rain: 0
+                    },
+                    Sunday: {
+                        temperature: 27,
+                        rain: 14
+                    }
+                };
+
+            function warmAndDryEnough(temp,rainfall) {
+                const beachDays = [];
+                for (let day in forecastInfo) {
+                    if (forecastInfo[day]["temperature"] >= temp && forecastInfo[day]["rain"] <= rainfall) {
+                        beachDays.push(day);
+                    }
+                }
+                console.log(beachDays);
+            }
+            warmAndDryEnough(24, 8);
+            warmAndDryEnough(24, 0);
+
+            function warmEnough(temp) {
+                const warmDays = [];
+                for (let day in forecastInfo) {
+                    if (forecastInfo[day]["temperature"] >= temp) {
+                        warmDays.push(day);
+                    }
+                }
+                console.log(warmDays);
+            }
+            warmEnough(24);
+            warmEnough(27);
+            warmEnough(34);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>Pathway to heaven!</title>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap" rel="stylesheet">     </head>
+    <style>
+        a:visited {
+            color: black;
+        }
+        nav {
+            background-color: rgb(0, 225, 255);
+            overflow: hidden;
+        }
+        ul {
+            list-style-type: none;
+        }
+        figcaption {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+        }
+        /*
+        Thanks to https://www.w3schools.com/howto/howto_js_topnav.asp for setting up nav bar
+        */
+        nav ul li {
+            font-family: 'Dancing Script', cursive;
+            float: left;
+            padding: 5px 15px 20px;
+            font-size: 17px;
+        }
+        nav ul li:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+        }
+
+        header {
+            font-family: 'Pacifico', cursive;
+        }
+        #recipeForHeaven {
+            display: none;
+        }
+
+        /*
+        Thanks to 
+        https://code-boxx.com/text-over-image-hover-html-css/
+        for below 'hover-over' help
+         */
+        #brownie {
+            position: relative;
+        }
+        #brownie img {
+            width: 50%;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+        .text {
+            box-sizing: border-box;
+            width: 50%;
+            padding: 10px;
+            margin: 0 25%;
+
+            position: absolute;
+            bottom: 18px;
+            left: -50px;
+
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+        }
+        .text {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #brownie:hover .text {
+            opacity: 1;
+        }
+    </style>
+    <body>
+        <header>
+            <a href="https://tasty.co/recipe/the-best-fudgy-brownies" target="_blank">
+                <h1>Pathway to Heaven</h1>
+            </a>
+        </header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Brownies!</a>
+                </li>
+                <li>
+                    <a href="#">Savoury Dishes</a>
+                </li>
+                <li>
+                    <a href="#">More Brownies!</a>
+                </li>
+                <li>
+                    <a href="#">Cuisines</a>
+                </li>
+                <li>
+                    <a href="#">Even More Brownies!</a>
+                </li>
+                <li>
+                    <a href="#">Cocktails</a>
+                </li>
+            </ul>
+        </nav>
+        <article>
+            <figure id="brownie">
+                <img src="https://img.buzzfeed.com/video-api-prod/assets/fafe8090b4f3434f80c33b6e4ce40e24/BFV21539_BestFudgyBrownies-ThumbB1080.jpg"
+                    alt="no image found">
+                <p class="text">Click for recipe!</p>
+                <figcaption>Brownie Time!</figcaption>
+            </figure>
+            <section id="recipeForHeaven">
+                <em><strong>Step By Step:</strong></em>
+                <ol>
+                    <li>Preheat the oven to 350°F (180°C). Line an 8-inch (20 cm) square baking dish with parchment paper.</li>
+                    <li>Chop the chocolate into chunks. Melt half of the chocolate in the microwave in 20-second intervals, saving the other
+                    half for later.</li>
+                    <li>In a large bowl, mix the butter and sugar with an electric hand mixer, then beat in the eggs and vanilla for 1-2
+                    minutes, until the mixture becomes fluffy and light in color.</li>
+                    <li>Whisk in the melted chocolate (make sure it's not too hot or else the eggs will cook), then sift in the flour, cocoa
+                    powder, and salt. Fold to incorporate the dry ingredients, being careful not to overmix as this will cause the brownies
+                    to be more cake-like in texture.</li>
+                    <li>Fold in the chocolate chunks, then transfer the batter to the prepared baking dish.</li>
+                    <li>Bake for 20-25 minutes, depending on how fudgy you like your brownies, then cool completely.</li>
+                    <li>Slice, then serve with a nice cold glass of milk!</li>
+                    <li>Enjoy!</li>
+                </ol>
+            </section>
+        </article>
+
+        <script>
+            const brownie = document.querySelector("#brownie");
+            brownie.addEventListener("click",function(){
+                const brownieRecipe = document.getElementById("recipeForHeaven");
+                brownieRecipe.style.display = "block";
+            })
+        </script>
+    </body>
+</html>

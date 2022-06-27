@@ -1,0 +1,7 @@
+ol {
+    display: flex;
+    flex-wrap: wrap;
+}
+ol li {
+    margin: 10px;
+}

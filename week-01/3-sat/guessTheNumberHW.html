@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Guess the Number!</title>
+        <!-- adding meta data based on lucy's suggestion -->
+        <meta charset="UTF-8">
+        <meta name="description" content="User guesses the number based on their specified range">
+        <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Quicksand:wght@500&family=Smooch&display=swap" rel="stylesheet">        
+        <style>
+            h1{
+                font-family: 'Oleo Script Swash Caps', cursive;
+                color:rgb(127, 255, 212);
+            }
+            input, button, h2{
+                font-family: 'Quicksand', sans-serif;
+            }
+            body{
+                background-image: url("https://w0.peakpx.com/wallpaper/68/879/HD-wallpaper-matrix-numbers-dark-green-movie-psychedelic-surreal-trippy.jpg");
+            }
+            .promp{
+                color: yellow;
+            }
+            div{
+                position: fixed;
+                bottom: 40%;
+                left: 20%;
+            }
+            #result{
+                font-family: 'Smoosh',cursive;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>Your Grace, please enter details below</h1>
+            <h2 class="promp">Madame/Sire, what would you like the range to be? From 0 to? -</h2>
+            <input type="number" id="max" name="input">
+            <button id="rang">Choose maximum value!</button>
+            <br>
+            <h2 class="promp">Enter the number you think the computer chose -</h2>
+            <input type="number" id="numb" name="input">
+            <button id="final">Submit!</button>
+            <h2 id="result"></h2>
+        </div>
+        <script>
+            //added parseInt() below because I realised that even though
+            //input type is selected as 'number' it stores as a string
+            //and to convert it to int we need to use parseInt(string)
+            let maxi=parseInt(document.getElementById("max").value);//taking user input
+            //for ceiling value of the range they chose
+
+            let comp=Math.floor(Math.random()*(maxi+1));
+            //using maxi+1 as the upper limit because math.floor is being used
+            //thus if user wants 10000 to show up as well, we need to consider
+            //a value +1 that
+
+            const rangeButton=document.getElementById("rang");//setting up a button to 
+            //allow user to select range; this button will trigger the rest of the
+            //functionality on the webpage
+
+            //tried to add two seperate functions - it started looking much cleaner
+            //but could not get code to work that way
+            //i wonder if using nested functions is bad coding practice?
+
+            const elem=document.getElementById("final");
+
+            rangeButton.addEventListener("click",function(){
+                if (parseInt(document.getElementById("max").value) <= 1){
+                    //break case - in case user enters a negative value; although the script
+                    //would work even in that case, but because the homework specs only asked for 
+                    //0 to a +ve upper limit, and on lucy's suggestion, putting in this condition
+                    document.getElementById("result").textContent="Please enter a valid range upper limit!";
+                    document.getElementById("result").style.color="rgb(255, 100, 71)";
+                }
+                else{
+                    document.getElementById("result").textContent="";//resetting result to empty string
+                    //in case user enters negative range first then does positive proper range in another attempt
+                    maxi=parseInt(document.getElementById("max").value);
+                    comp=Math.floor(Math.random()*(maxi+1));
+                    console.log(comp);//to test if the user/computer number check is happening correctly
+                    let input=parseInt(document.getElementById("numb").value);
+                    elem.addEventListener("click",function(){
+                    input=parseInt(document.getElementById("numb").value);
+                    if(input === comp) {
+                        document.getElementById("result").textContent="You got that right!";
+                        document.getElementById("result").style.color="rgb(77, 254, 195)";
+                    }
+                    else {
+                        if(input<comp) {
+                            document.getElementById("result").textContent="I believe in you - guess higher!";
+                            document.getElementById("result").style.color="rgb(255, 100, 71)";
+                        }
+                        else {
+                            document.getElementById("result").textContent="I believe in you - guess lower!";
+                            document.getElementById("result").style.color="rgb(255, 100, 71)";
+                        }
+                    }
+            })
+                }
+            })
+        </script>
+    </body>
+</html>

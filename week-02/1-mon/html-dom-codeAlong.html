@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>HTML-DOM Code Along</title>
+    </head>
+    <body>
+        Hello hello yes yes
+        <div>
+            <p>I am here, yes I am announcing my presence</p>
+        </div>
+        <script>
+            const nextVerse = document.createElement("p");
+            // document.body.appendChild(nextVerse);
+            nextVerse.textContent="I AM ALSO HERE!";
+            const divis=document.querySelector("div");
+            divis.appendChild(nextVerse);
+            const newNode=document.createElement("p");
+            newNode.textContent="I ALSO WANT TO JOIN THIS DANCE!";
+            document.body.insertAdjacentElement("beforeend",newNode);
+        </script>
+    </body>
+</html>

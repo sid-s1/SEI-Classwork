@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>Pig-Latin Translator!</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Pacifico&display=swap" rel="stylesheet">
+        <style>
+            h1,h3 {
+                font-family: 'Pacifico',cursive;
+            }
+            p {
+                font-family: 'Cormorant Garamond', serif;
+            }
+            body {
+                background-image: url('https://media.istockphoto.com/vectors/devil-cartoon-vector-id1326687453?k=20&m=1326687453&s=612x612&w=0&h=6Eja7_kbD9hGv-hNc5S3ZqhgHkAPKU7FwYUy3NRHzQ0=');
+            }
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -250px;
+                margin-left: -50px;
+                width: 200px;
+                height: 100px;
+            }
+            h1 {
+                text-align: center;
+            }
+            #result {
+                text-decoration: underline;
+            }
+            input {
+                border: 4px solid red;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to the Pig-Latin Translator! Glad to have you with us!</h1>
+        <div>
+            <p>Today we are going to translate sentences for you into a language that only circulates in the underbelly of the underworld itself...</p>
+            <p>Or rather, it is a language used by kids sometimes</p>
+            <p>Enter the sentence you want translated below please - </p>
+            
+            <!-- label 'for' is useful for accessibility on your webpage -->
+            <label for="userInput">
+                <input name="userInput" type="text" id="input">
+                <br>
+                <br>
+                <button onclick="translator()">Translate</button>
+            </label>
+
+            <h3>Result:</h3>
+            <p id="result"></p>
+        </div>
+        <script src="./scripts/wedHW.js"></script>
+    </body>
+</html>

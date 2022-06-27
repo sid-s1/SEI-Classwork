@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <title>Roll the dice!</title>
+        <style>
+            img,button {
+                display: inline-block;
+                margin: auto;
+                padding: 20px;
+            }
+            h1,h3 {
+                text-align: center;
+            }
+            input,.submitButtons {
+                display: block;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>What's the dice gonna give us this time..</h1>
+        <div id="roll">
+            <button id="roll1">Roll!</button>
+        </div>
+        <h3>Do you want to add more dice?</h3>
+        <button id="add">Add!</button>
+        <button id="remove">Remove!</button>
+        <div id="inputs"></div>
+        <h4 id="result"></h4>
+        <script>
+            function createImageAndHeader(diceNumber) {
+                const image = document.createElement("img");
+                image.classList.add("newImages");
+                const diceNumberElement = document.createElement("h4");
+                diceNumberElement.classList.add = "headerForDice";
+                document.querySelector("#roll").appendChild(diceNumberElement);
+                document.querySelector("#roll").appendChild(image);
+                drawDice(diceNumberElement,diceNumber);
+                return image;
+            }
+
+            function drawDiceImage(rand,image) {
+                switch(rand) {
+                    case 1:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/2/2c/Alea_1.png";
+                        break;
+                    case 2:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/b/b8/Alea_2.png";
+                        break;
+                    case 3:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Alea_3.png";
+                        break;
+                    case 4:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/8/8d/Alea_4.png";
+                        break;
+                    case 5:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png";
+                        break;
+                    case 6:
+                        image.src = "https://upload.wikimedia.org/wikipedia/commons/f/f4/Alea_6.png";
+                        break;
+                }
+            }
+
+            function drawDice(diceNumberElement,diceNumber) {
+                diceNumberElement.textContent = "Dice Number - "+diceNumber;
+                
+            }
+            function rollTheDice(button,image,diceNumber){
+                button.addEventListener("click",function() {
+                    const rand = Math.floor(Math.random() * 6 + 1);
+                    drawDiceImage(rand,image);
+                }
+                )
+            }
+
+            const moreDice = document.querySelector("#add");
+            moreDice.addEventListener("click",function(){
+
+                const quantityField = document.createElement("input");
+                const submitButton = document.createElement("button");
+                quantityField.id = "howManyMoreDice";
+                quantityField.placeholder = "How many more?";
+                quantityField.setAttribute("size",quantityField.getAttribute("placeholder").length);
+                submitButton.textContent = "Submit!";
+                submitButton.classList.add = "submitButtons";
+                document.querySelector("#inputs").appendChild(quantityField);
+                document.querySelector("#inputs").appendChild(submitButton);
+
+                submitButton.addEventListener("click",function(){
+                    const allImages = document.querySelectorAll("img");
+                    const allNewButtons = document.querySelectorAll(".newButtons");
+                    const allHeaders = document.querySelectorAll(".headerForDice");
+                    const button = document.querySelector("#roll1");
+                    const image = createImageAndHeader(1);
+                    rollTheDice(button,image,1);
+                    for (const image of allImages) {
+                        image.remove();
+                    }
+
+                    for (const button of allNewButtons) {
+                        button.remove();
+                    }
+
+                    for (const header of allHeaders) {
+                        header.remove();
+                    }
+
+                    const quantity = parseInt(document.querySelector("#howManyMoreDice").value);
+                    for (let i=2;i<=quantity+1;i++) {
+                        const button = document.createElement("button");
+                        button.textContent = "Roll!";
+                        button.classList.add("newButtons");
+                        document.querySelector("#roll").appendChild(button);
+                        const image = createImageAndHeader(i);
+                        rollTheDice(button,image,i);
+                    }
+                })
+            })
+
+            const button = document.querySelector("#roll1");
+            const image = createImageAndHeader(1);
+            rollTheDice(button,image,1);
+            
+            const noDice = document.querySelector("#remove");
+            noDice.addEventListener("click",function(){
+                const newInput = document.createElement("input");
+                newInput.placeholder = "How many of the recently added dice do you want to remove?";
+                newInput.setAttribute("size",newInput.getAttribute("placeholder").length);
+                document.querySelector("#inputs").appendChild(newInput);
+
+                const submitButton = document.createElement("button");
+                submitButton.textContent = "Submit!";
+                submitButton.classList.add = "submitButtons";
+                document.querySelector("#inputs").appendChild(submitButton);
+
+                submitButton.addEventListener("click",function(){
+                    let diceToBeRemoved = parseInt(newInput.value);
+                    while (diceToBeRemoved !== 0) {
+                        const newImages = document.querySelectorAll(".newImages");
+
+                        for (let index = newImages.length - 1;index >= newImages.length - diceToBeRemoved;index--) {
+                            newImages[index].remove();
+                        }
+
+                        diceToBeRemoved --;
+                    }
+                    
+                    
+                })
+
+
+
+            })
+        </script>
+    </body>
+</html>

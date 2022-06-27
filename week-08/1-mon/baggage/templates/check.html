@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if check %}
+        You can jump on this flight! now. right now.
+    {% else %}
+        Go away.
+        {% if weight_cond %}
+            You are violating the weight condition
+        {% endif %}
+        {% if height_cond %}
+            You are violating the height condition
+        {% endif %}
+        {% if width_cond %}
+            You are violating the width condition
+        {% endif %}
+        {% if depth_cond %}
+            You are violating the depth condition
+        {% endif %}
+    {% endif %}
+</body>
+</html>

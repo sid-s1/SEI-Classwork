@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Calculator!</title>
+    </head>
+    <body>
+        <h1>Online Calculator! Does it better than Google (I think)</h1>
+        <label for="number1">
+            Enter first number!
+            <input type="number" id="numb1">
+        </label>
+        <br>
+        <br>
+        <label for="number2">
+            Enter second number!
+            <input type="number" id="numb2">
+        </label>
+
+        <br>
+        <br>
+        <label for="operation-select">Choose an operation!</label>
+        <select name="ops" id="operation-select">
+            <option value="" disabled selected>--Please choose an option--</option>
+            <option value="add">ADD</option>
+            <option value="subtract">SUBTRACT</option>
+            <option value="multiply">MULTIPLY</option>
+            <option value="divide">DIVIDE</option>
+        </select>
+        <br>
+        <br>
+        <button onclick="droppie()">Enter!</button>
+
+
+        <div id="container"></div>
+        <br>
+        <br>
+        <h3>Go back to main page <a href="./marvelLab.html">HERE</a></h3>
+        <script src="./scripts/marvelScript.js"></script>
+    </body>
+</html>

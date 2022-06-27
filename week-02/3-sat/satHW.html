@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Battle of the Bands!</title>
+        <style>
+            button {
+                margin: 5px;
+            }
+            ul {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>These are some of the more popular bands - how do you feel about them?</h1>
+        <h3>First, click on one of the below -</h3>
+        <button id="all" onclick="allBands()">Show all bands!</button>
+        <button id="liked" onclick="showLikedBands()">Show 'My Liked' bands only!</button>
+        <h4 id="result"></h4>
+        <ul id="all-bands"></ul>
+        <ul id="liked-bands"></ul>
+        <script src="./scripts/satHWscript.js"></script>
+    </body>
+</html>

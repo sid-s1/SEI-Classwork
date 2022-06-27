@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>TRIAL</title>
+    </head>
+    <body>
+        <script>
+            const arr=['adore', 'afire', 'agree', 'aware', 'azure', 'brace', 'brake', 'brave', 'crane', 'crate', 'crave', 'craze', 'drake', 'drape', 'extra', 'frame', 'grace', 'grade', 'grape', 'grate', 'grave', 'graze', 'irate', 'racer', 'raise', 'ramen', 'range', 'rarer', 'raven', 'rebar', 'recap', 'regal', 'rehab', 'relax', 'relay', 'renal', 'repay', 'trace', 'trade', 'zebra'];
+            const arr2=['after', 'agree', 'aider', 'alert', 'alter', 'amber', 'anger', 'argue', 'arise', 'arose', 'avert', 'baker', 'baler', 'barge', 'beard', 'caper', 'carve', 'cater', 'cedar', 'clear', 'debar', 'eager', 'early', 'earth', 'eater', 'farce', 'gamer', 'gayer', 'gazer', 'hater', 'heard', 'heart', 'lager', 'large', 'later', 'layer', 'learn', 'maker', 'paler', 'paper', 'parse', 'payer', 'pearl', 'safer', 'saner', 'shear', 'smear', 'spear', 'swear', 'taker', 'tamer', 'taper', 'teary', 'wafer', 'wager', 'water', 'waver', 'weary', 'yearn'];
+            const finalArr=[];
+            for (let i=0;i<arr.length;i++){
+                for (let j=0;j<arr2.length;j++){
+                    if (arr[i] === arr2[j]){
+                        finalArr.push(arr2[j]);
+                    }
+                }
+            }
+            console.log(finalArr);
+        </script>
+    </body>
+</html>

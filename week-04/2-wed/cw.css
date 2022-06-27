@@ -1,0 +1,22 @@
+ol > li {
+    color: aquamarine;
+}
+
+#two {
+    color: black;
+}
+#two > li { /*use #two li if you want to make all grandchildren colored too*/
+    color: rebeccapurple;
+}
+#two li:nth-child(3) {
+    color: green;
+}
+div ol ul li { /*0,0,4*/
+    color: rgb(43, 150, 226);
+}
+.divi-yo .li-in-div { /*0,2,0 - this would have a higher priority than the previous one*/
+    color: black;
+}
+.divi-yo #three .li-in-div {
+    color: yellow; /*1,2,0 - will take priority over the above*/
+}

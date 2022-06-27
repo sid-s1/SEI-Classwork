@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Your new Keep Notes!</title>
+        <style>
+            li,button {
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Shopping List!</h1>
+        <label for="shopping-items">
+            <input type="text" for="shopping-items" id="items">
+            <br>
+            <br>
+            <select name="type" id="category" required>
+                <option value="" disabled selected>Select item category</option>
+                <option value="fruit">Fruits</option>
+                <option value="meat">Meats</option>
+                <option value="dairy">Dairy</option>
+                <option value="veg">Veggies</option>
+            </select>
+            <br>
+            <br>
+            <button id="add-item">Add item</button>
+        </label>
+
+        <br>
+        <br>
+        <br>
+
+        <button id="fruitsRemove">Remove all fruits</button>
+        <button id="meatsRemove">Remove all meats</button>
+        <button id="dairyRemove">Remove all dairy</button>
+        <button id="veggiesRemove">Remove all veggies</button>
+        <div id="container">
+            <ul id="list"></ul>
+            <h4 id="result"></h4>
+        </div>
+        
+        <script src="./scripts/cwLabPart2.js"></script>
+    </body>
+</html>

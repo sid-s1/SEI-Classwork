@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <title>Lab-2!</title>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+        <style>
+            * {
+                background-color: black;
+                color: white;
+                font-family: 'Nanum Pen Script', cursive;
+                box-sizing: border-box;
+                font-size: 3vw;
+            }
+            h1,h3 {
+                text-align: center;
+                font-size: 5vw;
+            }
+            #sort-type, #available-pets, #search-box {
+                display: flex;
+                justify-content: center;
+            }
+            section > button, div > button {
+                margin: 3vw;
+            }
+            #animal-props {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            #animal-list {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            #animal-list div {
+                padding: 4vw;
+                margin: 2vw;
+                width: 35%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            #animal-list .available {
+                border: 3px solid red;
+            }
+            #animal-list .hold {
+                border: 3px solid orange;
+            }
+            #animal-list .adopted {
+                border: 3px solid green;
+            }
+            img {
+                width: 100%;
+            }
+            .reset {
+                margin: 0;
+                padding: 0;
+                text-decoration: underline;
+                text-decoration-color: white;
+            }
+        </style>
+        <script defer src="./lab2.js"></script>
+    </head>
+    <body>
+        <h1>Delightful human accompaniments</h1>
+        <h3>Do you want to sort this list?</h3>
+
+        <section id='sort-type'>
+            <button id='sortName'>Sort by name</button>
+            <button id='sortStatus'>Sort by status</button>
+            <button id='sortSpecies'>Sort by species</button>
+        </section>
+
+        <h3>Are you looking for a specific animal?</h3>
+        
+        <section id='search-box'>
+            <input type="text" placeholder="Search for the pet you want to give a home to...">
+        </section>
+
+        <h3>Do you want to only see the available pets?</h3>
+        
+        <section id='available-pets'>
+            <button>Show available pets</button>
+        </section>
+
+        <h3>Do you want to add an animal to this list?</h3>
+        <div id="animal-props">
+            <button id='add-animal'>Yes please!</button>
+        </div>
+
+        <section id='animal-list'></section>
+    </body>
+</html>

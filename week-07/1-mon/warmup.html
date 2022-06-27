@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarmUp</title>
+</head>
+<body>
+    <button>Press this to toss!</button>
+    <button id='heads'>Press this to heads x 3!</button>
+    <script>
+        const button = document.querySelector('button');
+        button.addEventListener('click',toss);
+        const button2 = document.querySelector('#heads');
+        button2.addEventListener('click',headsTimes3);
+        const arr = ['heads','tails'];
+
+        function toss() {
+            const rand = Math.floor(Math.random(0, 1) * 2);
+            // console.log(arr[rand]);
+            return (arr[rand]);
+        }
+
+        function headsTimes3 () {
+            let count = 0;
+            let coinSide = toss();
+            while (count < 3) {
+                coinSide = toss();
+                console.log(coinSide);
+                if (coinSide === 'heads') {
+                    if (count === 3) {
+                        console.log('heads x 3!');
+                        break;
+                    }
+                    count++;
+                }
+                else {
+                    count = 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

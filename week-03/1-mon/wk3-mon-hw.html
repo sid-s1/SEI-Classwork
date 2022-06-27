@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <title>Objects</title>
+        <style>
+            button {
+                margin: 5px;
+            }
+            input {
+                width:100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>User Details!</h1>
+        <h3>Current users in the list - 
+            <ul></ul>
+        </h3>
+        <h2>See below details for solutions!</h2>
+        <div id="result"></div>
+        <div id="result2"></div>
+        <br>
+        <div id="result3"></div>
+        <br>
+        <div id="result4"></div>
+        <br>
+        <div id="new-user"></div>
+        <br>
+        <div id="final-list"></div>
+        <script>
+            const breakLine = document.createElement("br");
+            let users = {
+                theresa: {
+                    fullName: 'Theresa Smith',
+                    admin: true,
+                    age: 45,
+                    friends: ['freddie', 'meredith']
+                },
+                freddie: {
+                    fullName: 'Frederick Jones',
+                    admin: false,
+                    age: 32,
+                    friends: ['meredith']
+                },
+                meredith: {
+                    fullName: 'Meredith Johnson',
+                    admin: false,
+                    age: 56,
+                    friends: ['freddie', 'sally', 'theresa']
+                },
+                sally: {
+                    fullName: 'Sally Brown',
+                    admin: false,
+                    age: 28,
+                    friends: ['meredith']
+                }
+            }
+            const ans1 = document.createElement("p");
+            ans1.textContent = "Theresa's full name - "+users["theresa"]["fullName"];
+            document.getElementById("result").appendChild(ans1);
+
+            const ans2 = document.createElement("p");
+            ans2.textContent = "Freddie's age - "+users["freddie"]["age"];
+            document.getElementById("result").appendChild(ans2);
+
+            const ans3 = document.createElement("p");
+
+            const userInput = document.createElement("input");
+            const button = document.createElement("button");
+            button.id = "check";
+            document.getElementById("result2").appendChild(userInput);
+            document.getElementById("result2").appendChild(button);
+            document.querySelector("#check").textContent = "Check if user is admin or not";
+
+            document.querySelector("button").addEventListener("click",function(){
+                const username = userInput.value;
+                console.log(users);
+                if (users[username]["admin"] === true) {
+                    ans3.textContent = "Check if " +username+ " is an admin - "+"Is an admin";
+                }
+                else {
+                    ans3.textContent = "Check if " +username+ " is an admin - "+"Not an admin";
+                }
+                document.getElementById("result2").appendChild(ans3);
+            })
+
+            const newFriend = document.createElement("input");
+            const newFriendButton = document.createElement("button");
+            newFriendButton.id = "newFriend";
+            document.getElementById("result3").appendChild(newFriend);
+            document.getElementById("result3").appendChild(newFriendButton);
+            document.querySelector("#newFriend").textContent = "Add friend to Freddie's list of friends";
+
+            document.querySelector("#newFriend").addEventListener("click",function(){
+                const newFriendValue = newFriend.value;
+                users["freddie"]["friends"].push(newFriendValue);
+                const updatedFriends = document.createElement("p");
+                updatedFriends.textContent = "Freddie's current list of friends is - "+users["freddie"]["friends"];
+                document.getElementById("result3").appendChild(updatedFriends);
+            })
+
+            const addQuantity = document.createElement("input");
+            const addQuantityButton = document.createElement("button");
+            addQuantityButton.id = "quantity";
+            addQuantityButton.textContent = "Add this number of people to 'users'";
+            document.getElementById("result4").appendChild(addQuantity);
+            document.getElementById("result4").appendChild(addQuantityButton);
+            
+            const newUserDiv = document.querySelector("#new-user");
+            const listOfUsers = document.querySelector("#final-list");
+
+            document.querySelector("#quantity").addEventListener("click",function(){
+                let quantity = parseInt(addQuantity.value);
+                while (quantity !== 0) {
+                    let createUser = document.createElement("input");
+                    createUser.placeholder = "Example - theresa";
+                    let fullName = document.createElement("input");
+                    fullName.placeholder = "Example - Theresa Smith";
+                    let admin = document.createElement("input");
+                    admin.placeholder = "Example - true";
+                    let age = document.createElement("input");
+                    age.placeholder = "Example - 45";
+                    let friends = document.createElement("input");
+                    friends.placeholder = "Example - sid,more sid,more and more sid";
+                    let submit = document.createElement("button");
+                    submit.textContent = "Submit";
+
+                    newUserDiv.appendChild(createUser);
+                    newUserDiv.appendChild(fullName);
+                    newUserDiv.appendChild(admin);
+                    newUserDiv.appendChild(age);
+                    newUserDiv.appendChild(friends);
+                    newUserDiv.appendChild(submit);
+
+                    submit.addEventListener("click",function(){
+
+                        let user = createUser.value;
+                        users[user] = {};
+                        users[user]["friends"]=[];
+
+                        users[user]["fullName"] = fullName.value;
+                        users[user]["admin"] = Boolean(admin.value);
+                        users[user]["age"] = Number(age.value);
+                        users[user]["friends"].push(friends.value);
+                        
+                        const addition = document.createElement("p");
+                        addition.textContent = user+" added. "+"Their full name is - "+users[user]["fullName"]+" of age "+users[user]["age"]+" with admin status "+users[user]["admin"]+" and friends - "+users[user]["friends"];
+                        listOfUsers.appendChild(addition);
+                        changeHeaderList();
+                    })
+                    quantity--;
+                }
+            })
+
+            function changeHeaderList(){
+                const headerList = document.querySelector("ul");
+                headerList.innerHTML="";
+                const keys = Object.keys(users);
+                for (const key of keys) {
+                    const li = document.createElement("li");
+                    li.textContent = key;
+                    headerList.appendChild(li);
+
+                    const button = document.createElement("button");
+                    button.textContent = "Show friends";
+                    li.appendChild(button);
+                }
+
+                const allFriendButtons = document.querySelectorAll("ul li button");
+                for (const button of allFriendButtons) {
+                    let x = "";
+                    button.addEventListener("click",function(){
+                        const friendsShow = document.createElement("p");
+                        const content = button.parentElement.textContent;
+                        const user = content.slice(0,content.length-12);
+                        friendsShow.textContent = users[user]["friends"];
+                        for (const friend of users[user]["friends"]) {
+                            x = x + users[friend]["fullName"] + ", ";
+                        }
+                        friendsShow.textContent = x;
+                        document.body.appendChild(friendsShow);
+                    })
+                }
+            }
+            changeHeaderList();
+
+        </script>
+    </body>
+</html>

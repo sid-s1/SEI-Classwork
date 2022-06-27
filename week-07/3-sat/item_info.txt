@@ -1,0 +1,7 @@
+banana 1.00 False
+apple	0.50 False
+weetbix	3.00 False
+milk 2.00 False
+cookies	4.50 True
+chips	4.00 True
+bbqchicken 7.00 True

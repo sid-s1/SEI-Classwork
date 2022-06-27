@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Raindrop droptop</title>
+    </head>
+    <body>
+        <script>
+            const input = prompt("Enter a number!");
+            let result = "";
+
+            function ingOngAng () {
+                function mod3(number) {
+                    if (number % 3 !== 0 && number % 5 !== 0 && number % 7 !== 0) {
+                        return number;
+                    }
+                    else {
+                        if (number % 3 === 0) {
+                            result = result + "Plong";
+                        }
+                        return mod5(number, result);
+                    }
+                }
+
+                function mod5(number,result) {
+                    if (number % 5 === 0) {
+                        result = result + "Plang";
+                    }
+                    return mod7(number, result);
+                }
+
+                function mod7(number,result) {
+                    if (number % 7 === 0) {
+                        result = result + "Plong";
+                    }
+                    return result;
+                }
+                const res = mod3(input);
+                return res;
+            }
+            console.log(ingOngAng());
+        </script>
+    </body>
+</html>

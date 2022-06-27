@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Warmup!</title>
+    </head>
+    <body>
+        <div id="veggies"><p id="key1"></p></div>
+        <div id="fruitz"><p id="key2"></p></div>
+        <script>
+            const foods = {
+            vegetables: [],
+            fruits: []
+            }
+            foods.vegetables = ["carrots","broccoli","kale"];
+            foods.fruits = ["apple","banana","strawberry"];
+            console.log(foods);
+
+            const listTitles = Object.keys(foods);
+
+            for (const key of listTitles) {
+
+            }
+
+            const ul1 = document.createElement("ul");
+            document.getElementById("veggies").appendChild(ul1);
+            document.getElementById("key1").textContent = listTitles[0];
+            for (const vegetables of foods.vegetables) {
+                const li = document.createElement("li");
+                li.textContent = vegetables;
+                ul1.appendChild(li);
+            }
+
+            const ul2 = document.createElement("ul");
+            document.getElementById("fruitz").appendChild(ul2);
+            document.getElementById("key2").textContent = listTitles[1];
+            for (const fruits of foods.fruits) {
+                const li = document.createElement("li");
+                li.textContent = fruits;
+                ul2.appendChild(li);
+            }
+
+        </script>
+    </body>
+</html>

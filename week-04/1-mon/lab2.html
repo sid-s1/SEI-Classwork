@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movies</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <button id="movie-button">Add a movie poster</button>
+    <ol id="movie-list"></ol>
+
+    <script>
+        let index = 0;
+
+        // Find the HTML elements
+        let movieList = document.getElementById('movie-list');
+        let movieButton = document.getElementById('movie-button');
+
+        // When the movie button is clicked...
+        movieButton.addEventListener('click', function () {
+            // Add a list item with a movie poster inside of it
+            let item = document.createElement('li');
+            let movie = document.createElement('img');
+            movie.src = `https://api.lorem.space/image/movie?w=150&h=220&i=${index}`;
+            item.appendChild(movie);
+            movieList.appendChild(item);
+
+            // This index ensures we get different movie posters each time
+            index++;
+
+            movie.addEventListener("click",function() {
+                movieList.prepend(movie.parentElement);
+            })
+        })
+    </script>
+</body>
+
+</html>
