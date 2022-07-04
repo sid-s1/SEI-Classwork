@@ -1,0 +1,8 @@
+{% for movie in movie_list %}
+    <ul>
+        <li>
+            <img src="{{ movie['Poster'] }}" alt="">
+            <a href="">{{ movie['Title'] }}</a>
+        </li>
+    </ul>
+{% endfor %}
