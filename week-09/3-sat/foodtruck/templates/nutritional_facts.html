@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        table,th,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Food</th>
+        <th>Calories (in kCal)</th>
+        <th>Carbohydrates</th>
+        <th>Protein</th>
+        <th>Fat</th>
+    </tr>
+    {% for id,food,calories,carb,protein,fat in results %}
+        <tr>
+            <td>{{ food }}</td>
+            <td>{{ calories }}</td>
+            <td>{{ carb }}</td>
+            <td>{{ protein }}</td>
+            <td>{{ fat }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="javascript:history.back()">Go back a page</a>
+
+{% endblock %}

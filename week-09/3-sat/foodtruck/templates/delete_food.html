@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form action="/delete/food/{{ id }}" method="POST">
+        <h2>Are you sure you want to delete {{ item }}?</h2>
+        <button>Yes</button>
+    </form>
+    <a href="javascript:history.back()">No, go back</a>
+{% endblock %}

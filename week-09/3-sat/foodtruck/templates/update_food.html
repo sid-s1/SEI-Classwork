@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form action="/update/food/{{ id }}" method="POST">
+        {% for id,name,url,price in item %}
+            <h2>What details do you want to change for {{ name }}?</h2>
+            <div>
+                <label for="food-name">Name</label>
+                <input id="food-name" name="name" type="text" value="{{ name }}">
+            </div>
+            <div>
+                <label for="food-image">Image</label>
+                <input id="food-image" name="url" type="text" value="{{ url }}">
+            </div>
+            <div>
+                <label for="food-price">Price in cents</label>
+                <input id="food-price" name="price" type="number" value="{{ price }}">
+            </div>
+            <button>Done</button>
+        {% endfor %}
+    </form>
+    <a href="javascript:history.back()">None, go back</a>
+{% endblock %}
