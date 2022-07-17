@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div>
+        <h2>Add new food item</h2>
+        <form action="/add_food_action" method="POST">
+            <p>
+                <label>
+                    Name:
+                    <input type="text" name="name">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Image URL:
+                    <input type="text" name="image_url">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Price (in cents):
+                    <input type="number" name="price_in_cents">
+                </label>
+            </p>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}

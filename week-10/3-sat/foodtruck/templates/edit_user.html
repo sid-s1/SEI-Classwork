@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form action="{{ url_for('edit_user',id=user_data.id) }}" method="POST">
+        <h2>What details do you want to change for {{ user_data.name }}?</h2>
+        <div>
+            <label for="user-name">Name</label>
+            <input id="user-name" name="name" type="text" value="{{ user_data.name }}">
+        </div>
+        <div>
+            <label for="user-email">Email</label>
+            <input id="user-email" name="email" type="text" value="{{ user_data.email }}">
+        </div>
+        <div>
+            <label for="user-admin">Admin Status</label>
+            {% if user_data.admin == True %}
+                <input id="user-admin" name="admin" type="checkbox" checked>
+            {% else %}
+                <input id="user-admin" name="admin" type="checkbox">
+            {% endif %}
+        </div>
+        <div>
+            <label for="user-password">Password</label>
+            <input id="user-password" name="password" type="password">
+        </div>
+        <button>Done</button>
+    </form>
+    <a href="javascript:history.back()">None, go back</a>
+{% endblock %}

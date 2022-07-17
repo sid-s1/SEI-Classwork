@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Menu</title>
+{% endblock %}
+
+{% block body %}
+    <div class="menu">
+        <h2>Menu</h2>
+        <ul>
+            {% for food in foods %}
+                <li>
+                    <p>{{ food.name }} - ${{ food.price_in_cents/100 }}</p>
+                    <a href="/update_food?id={{ food.id }}">Update Item</a>
+                    <img src="{{ food.image_url }}" width="300">
+                    <form action="/delete_food_action" method="POST">
+                        <input type="hidden" name="id" value="{{food.id}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

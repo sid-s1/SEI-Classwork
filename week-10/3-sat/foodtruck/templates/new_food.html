@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="/food/create" method="POST">
+    <div>
+        <label for="food-name">Name</label>
+        <input id="food-name" name="name" type="text" required>
+    </div>
+    <div>
+        <label for="food-image">Image</label>
+        <input id="food-image" name="url" type="text" required>
+    </div>
+    <div>
+        <label for="food-price">Price in cents</label>
+        <input id="food-price" name="price" type="number" required>
+    </div>
+    <div>
+        <label for="calories">Calories (in kCal)</label>
+        <input id="calories" name="calories" type="number" step="0.01" required>
+    </div>
+    <div>
+        <label for="carbs">Carbohydrates (gms)</label>
+        <input id="carbs" name="carbs" type="number" step="0.01" required>
+    </div>
+    <div>
+        <label for="protein">Protein (gms)</label>
+        <input id="protein" name="protein" type="number" step="0.01" required>
+    </div>
+    <div>
+        <label for="fat">Fat (gms)</label>
+        <input id="fat" name="fat" type="number" step="0.01" required>
+    </div>
+    <button>Create Item</button>
+</form>
+<a href="javascript:history.back()">Go back a page</a>
+{% endblock %}

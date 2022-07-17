@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form action="{{ url_for('add_user') }}" method="POST">
+        <h2>Please add user details below:</h2>
+        <div>
+            <label for="user-name">Name</label>
+            <input id="user-name" name="name" type="text" required>
+        </div>
+        <div>
+            <label for="user-email">Email</label>
+            <input id="user-email" name="email" type="text" required>
+        </div>
+        <div>
+            <label for="user-admin">Admin Status</label>
+            <input id="user-admin" name="admin" type="checkbox">
+        </div>
+        <div>
+            <label for="user-password">Password</label>
+            <input id="user-password" name="password" type="password" required>
+        </div>
+        <button>Done</button>
+    </form>
+    <a href="javascript:history.back()">Changed my mind, go back</a>
+{% endblock %}

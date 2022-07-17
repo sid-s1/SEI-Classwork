@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        input {
+            border: solid black 2px;
+        }
+        #auth {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <form action="/login_check" method="POST">
+        <p>
+            <label>Email
+            <input class="fields" type="text" name="email" required>
+            </label>
+        </p>
+        <p>
+            <label>Password
+            <input class="fields" type="password" name="password" required>
+            </label>
+        </p>
+        <p id="auth">Authentication failed! Username or password do not match!</p>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="javascript:history.back()">Changed my mind, go back</a>
+    {% if unmatched == True %}
+        <script>
+            const auth = document.querySelector('#auth');
+            const inputs = document.querySelectorAll('.fields');
+            auth.style.display = "block";
+            for (const input of inputs) {
+                input.style.border = "solid red 2px";
+                input.addEventListener('input',function() {
+                    input.style.border = "solid black 2px";
+                    auth.style.display = "none";
+                })
+            }
+        </script>
+    {% endif %}
+{% endblock %}

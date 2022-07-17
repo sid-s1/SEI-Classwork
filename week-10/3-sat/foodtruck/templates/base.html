@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodtruck Homepage</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            background-color: beige;
+        }
+        nav ul {
+            padding: 1% 2%;
+            list-style: none;
+            display: flex;
+            position: fixed;
+            width: 100%;
+            background-color: grey;
+            color: white;
+            justify-content: space-between;
+        }
+        a {
+            color: black;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form div {
+            margin-bottom: 5px;
+        }
+    </style>
+    {% block head %} {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:5000/">Menu</a></li>
+            <li><a href="http://127.0.0.1:5000/contact">Contact Us</a></li>
+            {% if user != None %}
+                <li><a href="http://127.0.0.1:5000/food/new">Add a new food item</a></li>
+            {% endif %}
+            {% if admin == True %}
+            <li><a href="http://127.0.0.1:5000/users">List of Users</a></li>
+            {% endif %}
+            <li><a href="http://127.0.0.1:5000/nutrition">Nutritional Information</a></li>
+            {% if user != None %}
+                <li><a href="http://127.0.0.1:5000/logout">Logout</a></li>
+            {% else %}
+                <li><a href="http://127.0.0.1:5000/login">Login</a></li>
+            {% endif %}
+            {% if user == None %}
+            <li><a href="http://127.0.0.1:5000/signup">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% block body %} {% endblock %}
+</body>
+
+</html>

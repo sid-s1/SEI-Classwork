@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>Update {{ food.name }}</h2>
+
+    <form action="/update_food_action" method="POST">
+        <input type="hidden" name="id" value="{{ food.id }}">
+        <p>
+            <label>
+                Name:
+                <input type="text" name="name" value="{{ food.name }}">
+            </label>
+        </p>
+        <p>
+            <label>
+                Image URL:
+                <input type="text" name="image_url" value="{{ food.image_url }}">
+            </label>
+        </p>
+        <p>
+            <label>
+                Price (in cents):
+                <input type="number" name="price_in_cents" value="{{ food.price_in_cents }}">
+            </label>
+        </p>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

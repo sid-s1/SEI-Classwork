@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        button:hover {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <form action="{{ url_for('signup_action') }}" method="POST">
+        <h2>Please input your details below:</h2>
+        <div>
+            <label for="user-name">Name</label>
+            <input id="user-name" name="name" type="text" required>
+        </div>
+        <div>
+            <label for="user-email">Email</label>
+            <input id="user-email" name="email" type="text" required>
+        </div>
+        <div>
+            <label for="user-password">Password</label>
+            <input id="user-password" name="password" type="password" required>
+        </div>
+        <div>
+            <label for="retyped-password">Retype Password</label>
+            <input id="retyped-password" name="retyped_password" type="password" required>
+        </div>
+        <p>Passwords don't match!</p>
+        <button>Signup</button>
+    </form>
+    <a href="javascript:history.back()">Changed my mind, go back</a>
+    <script>
+        const password = document.querySelector('#user-password');
+        const retypedPassword = document.querySelector('#retyped-password');
+        const submit = document.querySelector('button');
+        const unmatched = document.querySelector('p');
+        unmatched.style.display = "none";
+        password.addEventListener('input', function () {
+            if (password.value !== retypedPassword.value) {
+                retypedPassword.style.border = "solid red 2px";
+                submit.disabled = true;
+                unmatched.style.display = "block";
+            }
+            else {
+                retypedPassword.style.border = "";
+                submit.disabled = false;
+                unmatched.style.display = "none";
+            }
+        });
+        retypedPassword.addEventListener('input', function () {
+            if (password.value !== retypedPassword.value) {
+                retypedPassword.style.border = "solid red 2px";
+                submit.disabled = true;
+                unmatched.style.display = "block";
+            }
+            else {
+                retypedPassword.style.border = "";
+                submit.disabled = false;
+                unmatched.style.display = "none";
+            }
+        });
+    </script>
+{% endblock %}

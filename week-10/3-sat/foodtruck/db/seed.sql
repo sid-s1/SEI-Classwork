@@ -1,0 +1,3 @@
+-- INSERT INTO food(name,image_url,price_cents) VALUES('Palak Paneer','https://commons.wikimedia.org/wiki/File:Preparing_Palak_Paneer.jpg',1500),('Chips','https://commons.wikimedia.org/wiki/File:French_fries_(Potato_Chips).JPG',300),('Hot dog','https://commons.wikimedia.org/wiki/File:Hot_dog_costco.jpg',1000);
+-- INSERT INTO nutrition(name,calories,carb,protein,fat) VALUES('Palak Paneer',366,10,15,30),('Chips',365,48,4,17),('Hot Dog',490,28,17,34);
+INSERT INTO users(email,name) VALUES('sid@sid.com','Siddharth'),('aditya@aditya.com','Aditya');

@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+li div {
+    display: flex;
+    flex-direction: column;
+}
+img {
+    max-width: 25%;
+}
+a {
+    color: black;
+    text-decoration: underline;
+}
