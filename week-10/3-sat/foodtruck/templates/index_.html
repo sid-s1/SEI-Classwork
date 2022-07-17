@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block body %}
+    {% if user != None %}
+        <h2>Welcome, {{ user }}</h2>
+    {% endif %}
+    <h1>Menu</h1>
+    <form action="/" method="GET">
+        <select name="sort" id="">
+            <option value="asc-name">Name (ascending)</option>
+            <option value="desc-name">Name (descending)</option>
+            <option value="asc-price">Price (low to high)</option>
+            <option value="desc-price">Price (high to low)</option>
+        </select>
+        <button>Submit</button>
+    </form>
+    <section id="menu">
+        <ul>
+            {% for id,name,image,price in results %}
+            <li>
+                <div>
+                    <h3><a href="https://en.wikipedia.org/wiki/{{ name }}" target="_blank">{{ name }}</a></h3>
+                    <img src="{{ image }}" alt="">
+                    <h3>Price - ${{ price/100 }}</h3>
+                    {% if user != None %}
+                        <h4><a href="{{ url_for('delete_food_item', id=id) }}">Delete</a></h4>
+                        <h4><a href="{{ url_for('update_food_item', id=id) }}">Update</a></h4>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

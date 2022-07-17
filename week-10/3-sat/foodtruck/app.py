@@ -25,7 +25,7 @@ def index():
         results = sorted(cur.fetchall(), key=lambda tup: tup[1], reverse=True)
     else:
         results = cur.fetchall()
-    return render_template('index.html', results=results, user=session.get('username'), admin=session.get('admin'))
+    return render_template('index_.html', results=results, user=session.get('username'), admin=session.get('admin'))
 
 
 @app.route('/food/new')
