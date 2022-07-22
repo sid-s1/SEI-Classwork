@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        #reviews {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            width: 50%;
+            height: auto;
+            border-radius: 20px;
+            /* background-color: rgb(43, 106, 224); */
+        }
+        #current-reviews {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            background-color: rgb(43, 106, 224);
+            padding: 2%;
+            margin: 2%;
+        }
+        p {
+            /* background-color: rgb(43, 106, 224); */
+            color: beige;
+        }
+        /* #deletion {
+            background-color: rgb(43, 106, 224);
+        } */
+        #name {
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 1.5em;
+        }
+        .review-del-btn {
+            margin: 0;
+            width: 100px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h2>Reviews</h2>
+    {% if user != None and admin == False and reviewed_already == False %}
+    <div id="new-review">
+        <form action="/reviews" method="POST">
+            <label for="review">Let us know what you think!</label>
+            <div>
+                <textarea name="review" id="review" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+                <select name="rating" id="rating">
+                    <option selected disabled>Please select a value</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+    {% endif %}
+    <section id="reviews">
+    {% for review in reviews %}
+        <div class="container">
+            <p id="review">"{{ review.review }}"</p>
+            <p id="rating">
+                {% for i in range(review.rating) %}
+                    <img src="https://media.istockphoto.com/vectors/hot-dog-dachshund-pet-animal-hotdog-vector-illustration-vector-id859830416?k=20&m=859830416&s=612x612&w=0&h=q6_YursWKq_TItaax6Jh0sf2pe13DMbld-csJWs28C0=" width="80" height="70">
+                {% endfor %}
+            </p>
+            <p id="name">{{ review.name }}</p>
+            {% if admin == True %}
+            <form id="deletion" action="/delete_review" method="POST">
+                <input type="hidden" value="{{ review.id }}" name="id">
+                <button class="review-del-btn">Delete Review</button>
+            </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </section>
+    <a href="javascript:history.back()">Go back</a>
+{% endblock %}

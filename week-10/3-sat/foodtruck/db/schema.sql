@@ -20,3 +20,9 @@ CREATE TABLE IF NOT EXISTS nutrition(
 CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY, email TEXT, name TEXT
 );
+
+-- Reviews table
+CREATE TABLE IF NOT EXISTS reviews(
+    id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users,
+    review TEXT, rating INTEGER
+);

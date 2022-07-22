@@ -9,15 +9,36 @@
     <style>
         * {
             box-sizing: border-box;
-            background-color: beige;
+            /* background-color: beige; */
         }
-        nav ul {
+        body {
+            margin-left: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            height: auto;
+            border-radius: 20px;
+            min-width: 500px;
+            background-color: rgb(43, 106, 224);
+        }
+        .top-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .top-bar ul {
+            margin-top: 0;
             padding: 1% 2%;
             list-style: none;
             display: flex;
-            position: fixed;
-            width: 100%;
-            background-color: grey;
+            /* position: fixed; */
+            /* width: 100%; */
+            background-color: beige;
             color: white;
             justify-content: space-between;
         }
@@ -35,25 +56,26 @@
 </head>
 
 <body>
-    <nav>
+    <nav class="top-bar">
         <ul>
             <li><a href="http://127.0.0.1:5000/">Menu</a></li>
-            <li><a href="http://127.0.0.1:5000/contact">Contact Us</a></li>
             {% if user != None %}
-                <li><a href="http://127.0.0.1:5000/food/new">Add a new food item</a></li>
+            <li><a href="http://127.0.0.1:5000/food/new">Add a new food item</a></li>
             {% endif %}
             {% if admin == True %}
             <li><a href="http://127.0.0.1:5000/users">List of Users</a></li>
             {% endif %}
             <li><a href="http://127.0.0.1:5000/nutrition">Nutritional Information</a></li>
             {% if user != None %}
-                <li><a href="http://127.0.0.1:5000/logout">Logout</a></li>
+            <li><a href="http://127.0.0.1:5000/logout">Logout</a></li>
             {% else %}
-                <li><a href="http://127.0.0.1:5000/login">Login</a></li>
+            <li><a href="http://127.0.0.1:5000/login">Login</a></li>
             {% endif %}
             {% if user == None %}
             <li><a href="http://127.0.0.1:5000/signup">Signup</a></li>
             {% endif %}
+            <li><a href="http://127.0.0.1:5000/contact">Contact Us</a></li>
+            <li><a href="http://127.0.0.1:5000/reviews">Reviews</a></li>
         </ul>
     </nav>
     <br>

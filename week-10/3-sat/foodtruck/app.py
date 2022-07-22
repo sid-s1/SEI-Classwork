@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, request, redirect, session
 import psycopg2
 from hash import hash, check
@@ -175,12 +176,13 @@ def login_check():
 
     if passwords_match:
         cur.execute("""
-        SELECT name,admin FROM users WHERE email=%s
+        SELECT id,name,admin FROM users WHERE email=%s
         """, (email,))
         result = cur.fetchall()
         if len(result) != 0:
-            session['username'] = result[0][0]
-            session['admin'] = result[0][1]
+            session['id'] = result[0][0]
+            session['username'] = result[0][1]
+            session['admin'] = result[0][2]
             return redirect('/')
         else:
             return render_template('login.html', user=session.get('username'), admin=session.get('admin'), unmatched=True)
@@ -330,6 +332,57 @@ def add_user_db():
         <h2>You need to login to view that page!</h2>
         <a href="javascript:history.back()">Go back</a>
         '''
+
+
+@app.route('/reviews')
+def review_page():
+    conn = psycopg2.connect("dbname=food_truck")
+    cur = conn.cursor()
+    cur.execute("""
+    SELECT reviews.id,name,review,rating FROM users INNER JOIN reviews ON users.id=reviews.user_id
+    """)
+    results = cur.fetchall()
+    reviews = []
+    for result in results:
+        image = "/Users/sid/Courses/GA-SEI/sei-course/SEI-Classwork/siddharth-singh/week-10/3-sat/foodtruck/hotdog.jpeg"
+        reviews.append({
+            'id': result[0],
+            'name': result[1],
+            'review': result[2],
+            'rating': result[3]
+        })
+    for review in reviews:
+        reviewed_already = False
+        if review['name'] == session.get('username'):
+            reviewed_already = True
+    return render_template('reviews.html', reviews=reviews, image=image, reviewed_already=reviewed_already, user=session.get('username'), admin=session.get('admin'))
+
+
+@app.route('/reviews', methods=["POST"])
+def submit_review():
+    id = session.get('id')
+    review = request.form.get('review')
+    rating = request.form.get('rating')
+
+    conn = psycopg2.connect("dbname=food_truck")
+    cur = conn.cursor()
+    cur.execute("""
+    INSERT INTO reviews(user_id,review,rating) VALUES(%s,%s,%s)
+    """, (id, review, rating))
+    conn.commit()
+    return redirect('/reviews')
+
+
+@app.route('/delete_review', methods=["POST"])
+def delete_review():
+    id = request.form.get('id')
+    conn = psycopg2.connect("dbname=food_truck")
+    cur = conn.cursor()
+    cur.execute("""
+    DELETE FROM reviews WHERE id=%s
+    """, (id,))
+    conn.commit()
+    return redirect('/reviews')
 
 
 @app.route('/logout')

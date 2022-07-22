@@ -3,12 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 {% block body %}
-    <div class="welcome">
-        {% if user != None %}
-            <h2>Welcome, {{ user }}</h2>
-        {% endif %}
-        <h1>Menu</h1>
-    </div>
+    <h1>Menu</h1>
     <form action="/" method="GET">
         <select name="sort" id="">
             <option value="asc-name">Name (ascending)</option>
@@ -21,19 +16,15 @@
     <section id="menu">
         <ul>
             {% for id,name,image,price in results %}
-            <div class="food-container">
-                <li class="food-item">
+            <li>
+                <div>
                     <h3><a href="https://en.wikipedia.org/wiki/{{ name }}" target="_blank">{{ name }}</a></h3>
                     <img src="{{ image }}" alt="">
-                    <h3>Price - ${{ price/100 }}</h3>
-                    {% if user != None %}
-                        <div class="link-row">
-                            <h4><a href="{{ url_for('delete_food_item', id=id) }}">Delete</a></h4>
-                            <h4><a href="{{ url_for('update_food_item', id=id) }}">Update</a></h4>
-                        </div>
-                    {% endif %}
-                </li>
-            </div>
+                    <h3>Price - {{ price }}</h3>
+                    <h4><a href="{{ url_for('delete_food_item', id=id) }}">Delete</a></h4>
+                    <h4><a href="{{ url_for('update_food_item', id=id) }}">Update</a></h4>
+                </div>
+            </li>
             {% endfor %}
         </ul>
     </section>
