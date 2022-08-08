@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const n = 16;
+        let switchLine = true;
+        let result = "";
+        for(let core=0;core<n/2;core++) {
+            result = "";
+            if(switchLine == true) {
+                switchLine = false;
+            }
+            else {
+                switchLine = true;
+            }
+            for(let child=1;child<=n-1;child++) {
+                if(switchLine == false) {
+                    if (child % 2 != 0) {
+                        result = result + "#";
+                    }
+                    else {
+                        result = result + " ";
+                    }
+                }
+                else {
+                    if (child % 2 == 0) {
+                        result = result + "#";
+                    }
+                    else {
+                        result = result + " ";
+                    }
+                }
+            }
+            if(switchLine) {
+                console.log(result + "#");
+            }
+            else {
+                console.log(result);
+            }
+        }
+    </script>
+</body>
+</html>
