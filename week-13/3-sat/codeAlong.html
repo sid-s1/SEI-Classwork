@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inp">
+    <button id="but">Search</button>
+    <div id="container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('but').addEventListener('click',() => {
+            const breed = document.getElementById('inp').value;
+            const container = document.getElementById('container');
+            container.innerHTML = "";
+            axios({
+                method: 'get',
+                url: `https://dog.ceo/api/breed/${breed}/images`,
+                responseType: 'stream'
+            })
+            //or axios(`https://dog.ceo/api/breed/${breed}/images`)
+            .then(function (response) {
+                const images = response.data.message;
+                images.forEach((link) => {
+                    const img = document.createElement('img');
+                    img.src = link;
+                    container.appendChild(img);
+                });
+            }).catch(err => container.textContent = 'Something went wrong while looking for that breed!');
+        });
+    </script>
+</body>
+</html>
