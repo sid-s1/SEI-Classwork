@@ -5,16 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab</title>
+    <style>
+        .modal {
+            z-index: -1;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(1.1);
+            transition: linear 0.35s, opacity 0.35s 0s, transform 0.35s;
+        }
+        .modal-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(249, 249, 212);
+            padding: 1rem 1.5rem;
+            width: 24rem;
+            border-radius: 0.5rem;
+        }
+        .modal-content {
+            color: rgba(1, 67, 1, 0.816);
+            text-align: center;
+        }
+        .show-modal {
+            z-index: 1;
+            opacity: 1;
+            transform: scale(1.0);
+            transition: linear 0.35ss, opacity 0.35s, transform 0.35s;
+        }
+    </style>
 </head>
 <body>
     <input type="text" id="inp">
     <ul></ul>
-    <div id="modal"></div>
+    <div class="modal">
+        <div class="modal-box">
+            <div class="modal-content">
+                <h1>Movie Plot</h1>
+                <h4></h4>
+                <div class="centering-container">
+                    <button id="try-again">Go back</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="container"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const ul = document.querySelector('ul');
         const container = document.getElementById('container');
+        document.getElementById('try-again').addEventListener('click', () => {
+                document.querySelector('.modal').classList.remove('show-modal');
+            });
         const getMovies = (query) => {
                 axios(`http://www.omdbapi.com/?apikey=2a46f224&s=${query}`)
                 .then(function (response) {
@@ -32,7 +79,8 @@
                         li.addEventListener('click',() => {
                             axios(`http://www.omdbapi.com/?apikey=2a46f224&i=${item.imdbID}`)
                             .then(function(response){
-                                document.getElementById('modal').textContent = response.data.Plot;
+                                document.querySelector('.modal-content > h4').textContent = response.data.Plot;
+                                document.querySelector('.modal').classList.toggle('show-modal');
                             })
                         });
 
