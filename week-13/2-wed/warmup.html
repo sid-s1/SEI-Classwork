@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const map1 = [
+                ["A", "A", "A", "A", "A", "A"],
+                ["A", "A", "A", "A", "A", "A"],
+                ["A", "A", "A", "A", "A", "A"],
+                ["A", "A", "A", "A", "X", "A"],
+                ["A", "A", "A", "A", "A", "A"],
+                ["A", "A", "A", "A", "A", "A"]
+            ];
+        const hasX = function(arr) {
+            return arr.includes("X");
+        }
+        const arrayContainingX = map1.filter(hasX);
+        console.log(arrayContainingX);
+
+        function treasureFinder(map) {
+            let coordinateX = 0;
+            let coordinateY = 0;
+            let i = 0;
+            for(let walk=0;walk<map.length;walk+=1) {
+                // for(let elem=0;elem<map[walk].length;elem+=1) {
+                //     if(map[walk][elem] == "X") {
+                //         coordinateX = elem;
+                //         coordinateY = walk;
+                //     }
+                // }
+                const ind = map[walk].indexOf("X");
+                if(ind > -1) {
+                    coordinateX = walk;
+                    coordinateY = ind;
+                }
+                else {
+                    i += 1;
+                }
+            }
+            console.log(coordinateX,coordinateY);
+        }
+        treasureFinder(map1);
+    </script>
+</body>
+</html>
