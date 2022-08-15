@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warmup</title>
+    <style>
+        .container {
+            top: 0;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+
+
+
+
+    <script>
+        const board = {};
+
+        const createABoard = (n) => {
+            board['Square1'] = 1;
+            for (let i = 2; i <= n; i++) {
+                board[`Square${i}`] = board[`Square${i - 1}`] * 2;
+            }
+        }
+
+        createABoard(64);
+
+        const eachSquares = () => {
+            for (const [key, value] of Object.entries(board)) {
+                console.log(`${key}: ${value}`);
+            }
+        }
+
+        const square = (x) => {
+            console.log(board[`Square${x}`])
+        }
+
+        const allSquares = (n) => {
+            let totalGrains = 0;
+            for (const [key,value] of Object.entries(board)) {
+                totalGrains += value;
+            }
+            console.log(`The total number of grains is ${totalGrains}`)
+        }
+
+        // eachSquares();
+        // square(12);
+        // allSquares(64);
+    </script>
+</body>
+</html>
