@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See my pokemen</title>
+</head>
+<body>
+    <div id="container">
+        <div id="sub-container">
+            <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
+            <button id="find">Find my Pokemon!</button>
+            <button id="add">Add a Pokemon</button>
+            <button id="edit">Change a pokemon name</button>
+            <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
+            <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const container = document.getElementById('container');
+        const showAll = document.getElementById('showAll');
+        showAll.addEventListener('click', () => {
+            axios('http://127.0.0.1:3000/pokemon')
+            .then(function(response) {
+                const allPokemonDiv = document.createElement('div');
+                const allPokemon = document.createElement('ul');
+                for(const pokemon of response.data) {
+                    const li = document.createElement('li');
+                    li.textContent = pokemon.name;
+                    const image = document.createElement('img');
+                    image.src = pokemon.img;
+                    li.appendChild(image);
+                    allPokemon.appendChild(li);
+                }
+                allPokemonDiv.appendChild(allPokemon);
+                container.appendChild(allPokemonDiv);
+            })
+        });
+    </script>
+</body>
+</html>
