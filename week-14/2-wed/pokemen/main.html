@@ -5,6 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>See my pokemen</title>
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+        #sub-container {
+            display: flex;
+            width: 75%;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 1.1vw;
+            border: 0;
+            width: 15%;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0.5rem 0.5rem rgb(172, 172, 172);
+            cursor: pointer;
+            margin: 1%;
+            background-color: beige;
+        }
+        .deleteBtn {
+            width: fit-content;
+            padding: 0.5rem;
+            box-shadow: 0.1rem 0.1rem rgb(172, 172, 172);
+            font-size: 1vw;
+        }
+        button:hover {
+            background-color: rgb(72, 1, 139);
+            color: aliceblue;
+        }
+        button:active {
+            box-shadow: 0 0;
+            transform: translate(5%,5%);
+        }
+        #results, #allPokeDiv {
+            display: flex;
+            width: 75%;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-left: 4%;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            padding-inline-start: 0;
+        }
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            font-size: 1.1vw;
+        }
+        img {
+            width: 10vw;
+            height: auto;
+            border: 2px solid black;
+        }
+        input {
+            width: 20vw;
+            border: 0;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 1rem;
+        }
+        #search-poke, #add-poke {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #pokeSearchRes {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
@@ -12,32 +95,164 @@
             <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
             <button id="find">Find my Pokemon!</button>
             <button id="add">Add a Pokemon</button>
-            <button id="edit">Change a pokemon name</button>
-            <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
-            <button id="showAll">Show me all pokemons! (pokeMEN?)</button>
+            <button id="edit">Change a pokemon details</button>
         </div>
+        <div id="results"></div>
+        <div id="new-poke"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const container = document.getElementById('container');
         const showAll = document.getElementById('showAll');
-        showAll.addEventListener('click', () => {
+        const findPoke = document.getElementById('find');
+        const results = document.getElementById('results');
+        const addPoke = document.getElementById('add');
+        const editPoke = document.getElementById('edit');
+        const newPokeDiv = document.getElementById('new-poke');
+        
+        const showAllPokemen = () => {
             axios('http://127.0.0.1:3000/pokemon')
-            .then(function(response) {
-                const allPokemonDiv = document.createElement('div');
-                const allPokemon = document.createElement('ul');
-                for(const pokemon of response.data) {
-                    const li = document.createElement('li');
-                    li.textContent = pokemon.name;
-                    const image = document.createElement('img');
-                    image.src = pokemon.img;
-                    li.appendChild(image);
-                    allPokemon.appendChild(li);
+            .then(function (response) {
+                const checkAllPokeDiv = document.getElementById('allPokeDiv');
+                if (!checkAllPokeDiv) {
+                    const allPokemonDiv = document.createElement('div');
+                    const allPokemon = document.createElement('ul');
+                    allPokemonDiv.id = 'allPokeDiv';
+                    for (const pokemon of response.data) {
+                        const li = document.createElement('li');
+                        const button = document.createElement('button');
+                        button.textContent = "Delete Me";
+                        button.classList.add('deleteBtn');
+                        li.textContent = pokemon.name;
+                        const image = document.createElement('img');
+                        image.src = pokemon.img;
+                        li.appendChild(image);
+                        li.appendChild(button);
+                        allPokemon.appendChild(li);
+                        button.addEventListener('click',() => {
+                            axios.delete(`http://127.0.0.1:3000/pokemon/${pokemon.name}`)
+                            .then(function(response) {
+                                results.innerHTML = '';
+                                newPokeDiv.innerHTML = '';
+                                showAllPokemen();
+                            })
+                        });
+                    }
+                    allPokemonDiv.appendChild(allPokemon);
+                    results.appendChild(allPokemonDiv);
                 }
-                allPokemonDiv.appendChild(allPokemon);
-                container.appendChild(allPokemonDiv);
             })
+        };
+
+        const createPokeAndImgFields = () => {
+            const div = document.createElement('div');
+            div.id = 'add-poke';
+            const input = document.createElement('input');
+            input.placeholder = 'Enter your pokemon name...';
+            const input2 = document.createElement('input');
+            input2.placeholder = 'Enter your pokemon image link...';
+            const button = document.createElement('button');
+            button.textContent = 'Submit';
+            div.appendChild(input);
+            div.appendChild(input2);
+            div.appendChild(button);
+            results.appendChild(div);
+            const objToReturn = {
+                inp1:input,
+                inp2:input2,
+                btn:button
+            }
+            return objToReturn;
+        };
+
+        showAll.addEventListener('click', () => {
+            results.innerHTML = '';
+            newPokeDiv.innerHTML = '';
+            showAllPokemen();
         });
+
+        findPoke.addEventListener('click', () => {
+            results.innerHTML = '';
+            const div = document.createElement('div');
+            div.id = 'search-poke';
+            const input = document.createElement('input');
+            input.placeholder = 'Enter your pokemon name...';
+            const button = document.createElement('button');
+            button.textContent = 'Submit';
+            div.appendChild(input);
+            div.appendChild(button);
+            results.appendChild(div);
+
+            button.addEventListener('click', () => {
+                const toSearch = input.value;
+                axios(`http://127.0.0.1:3000/pokemon/${toSearch}`)
+                .then(function(response) {
+                    results.innerHTML = '';
+                    const resultDiv = document.createElement('div');
+                    resultDiv.id = 'pokeSearchRes';
+                    const pokeName = document.createElement('h4');
+                    pokeName.textContent = response.data.name;
+                    const image = document.createElement('img');
+                    image.src = response.data.img;
+                    resultDiv.appendChild(pokeName);
+                    resultDiv.appendChild(image);
+                    results.appendChild(resultDiv);
+                })
+                .catch(err => results.textContent = 'Could not find pokemon!')
+            });
+
+        });
+
+        addPoke.addEventListener('click', () => {
+            results.innerHTML = '';
+            newPokeDiv.innerHTML = '';
+            const obj = createPokeAndImgFields();
+            const input = obj.inp1;
+            const input2 = obj.inp2;
+            const button = obj.btn;
+            button.addEventListener('click', () => {
+                const toAdd = input.value;
+                const imageLink = input2.value;
+                const objToAdd = {
+                    name:toAdd,
+                    img:imageLink
+                };
+                axios.post('http://127.0.0.1:3000/pokemon',objToAdd)
+                .then(function(response) {
+                    results.innerHTML = '';
+                    newPokeDiv.innerHTML = '';
+                    showAllPokemen();
+                })
+            });
+        });
+
+        editPoke.addEventListener('click', () => {
+            results.innerHTML = '';
+            newPokeDiv.innerHTML = '';
+            const obj = createPokeAndImgFields();
+            const input = obj.inp1;
+            const input2 = obj.inp2;
+            const newPokeName = document.createElement('input');
+            newPokeName.placeholder = 'Enter your NEW pokemon name...';
+            results.appendChild(newPokeName);
+            const button = obj.btn;
+            button.addEventListener('click', () => {
+                const toEdit = input.value;
+                const imageLink = input2.value;
+                const newPoke = newPokeName.value;
+                const objToAdd = {
+                    name: newPoke,
+                    img: imageLink
+                };
+                axios.put(`http://127.0.0.1:3000/pokemon/${toEdit}`, objToAdd)
+                .then(function(response) {
+                    results.innerHTML = '';
+                    newPokeDiv.innerHTML = '';
+                    showAllPokemen();
+                })
+            });
+        });
+
     </script>
 </body>
 </html>

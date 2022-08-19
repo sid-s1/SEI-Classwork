@@ -41,7 +41,6 @@ app.get('/pokemon', (request, response) => {
     pokemon.forEach((poke) => {
         list.push(poke.name);
     });
-    // response.json(list);
     response.json(pokemon);
 });
 
