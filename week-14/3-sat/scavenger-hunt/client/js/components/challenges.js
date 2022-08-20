@@ -1,6 +1,6 @@
 const renderChallenges = () => {
     section.innerHTML = '';
-    axios('http://127.0.0.1:3000/api/challenges')
+    axios('/api/challenges')
         .then(function (response) {
             for (const challenge of response.data) {
                 const div = document.createElement('div');

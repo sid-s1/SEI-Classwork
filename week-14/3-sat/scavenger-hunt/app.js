@@ -1,6 +1,5 @@
 const express = require('express');
 const pg = require('pg');
-const cors = require('cors');
 
 const app = express();
 const port = 3000;
@@ -9,7 +8,6 @@ const db = new pg.Pool({
 });
 
 app.use(express.static('client'));
-app.use(cors());
 
 app.get('/api/challenges', (request, response) => {
     const sql = 'SELECT * FROM challenges LIMIT 100';
