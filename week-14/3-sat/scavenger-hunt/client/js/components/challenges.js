@@ -11,16 +11,28 @@ const renderChallenges = () => {
 
                 name.textContent = challenge.name;
                 name.classList.add('challenge-btn');
-                description.textContent = challenge.description;
-                address.textContent = challenge.address;
+                const challengeId = challenge.id;
+                // description.textContent = challenge.description;
+                // address.textContent = challenge.address;
                 div.appendChild(name);
                 let clickState = false;
 
                 name.addEventListener('click', () => {
                     if (!clickState) {
                         clickState = true;
-                        div.appendChild(description);
-                        div.appendChild(address);
+                        if (description.textContent.length == 0) {
+                            axios(`/api/challenges/${challengeId}`)
+                                .then(function (result) {
+                                    description.textContent = result.data[0].description;
+                                    address.textContent = result.data[0].address;
+                                    div.appendChild(description);
+                                    div.appendChild(address);
+                                })
+                        }
+                        else {
+                            div.appendChild(description);
+                            div.appendChild(address);
+                        }
                     }
                     else {
                         clickState = false;
