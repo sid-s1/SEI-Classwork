@@ -1,0 +1,15 @@
+.challenge-box {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    border-radius: 2em;
+    margin: 2%;
+}
+.challenge-btn {
+    border: 0;
+    border-radius: 2em;
+    padding: 2%;
+}
