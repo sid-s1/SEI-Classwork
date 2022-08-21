@@ -26,6 +26,17 @@ const renderChallenges = () => {
     });
     p.then(() => {
         challenges.style.display = 'flex';
+        setTimeout(() => {
+            const boxes = document.getElementsByClassName('challenge-box');
+            for (const box of boxes) {
+                setInterval(() => {
+                    box.classList.add('pulse');
+                }, 1500);
+                setInterval(() => {
+                    box.classList.remove('pulse');
+                }, 3000);
+            }
+        }, 100);
     });
 };
 
