@@ -1,3 +1,54 @@
+body {
+    background-color: black;
+    font-family: 'Mystery Quest','cursive';
+}
+#header-nav {
+    border: 0.25rem solid gold;
+    border-radius: 3rem;
+    box-shadow: 0.25rem 0.25rem 14px 3px gold;
+    color: gold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+h1,ul {
+    padding: 0 1.5rem;
+}
+#navlist {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    align-items: center;
+    width: 25%;
+    padding-right: 4rem;
+}
+.nav-btn {
+    font-family: 'Mystery Quest', 'cursive';
+    width: 15vw;
+    height: 5vw;
+    margin: 0 1rem;
+    border: 0.25rem solid gold;
+    border-radius: 3rem;
+    box-shadow: 0.25rem 0.25rem 15px gold;
+    color: gold;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: linear 0.25s;
+}
+.nav-btn:hover {
+    color: black;
+    background-color: gold;
+}
+.nav-btn:active {
+    color: black;
+    background-color: gold;
+    box-shadow: 0 0;
+    transform: translate(0.25rem,0.25rem);
+}
+
 .challenge-box {
     display: flex;
     flex-direction: column;
