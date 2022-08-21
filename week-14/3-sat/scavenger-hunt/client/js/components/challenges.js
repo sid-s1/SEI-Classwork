@@ -1,12 +1,32 @@
 const challenges = document.getElementById('challenges');
+const progress = document.getElementById('progress');
 
 const renderChallenges = () => {
     welcome.style.display = 'none';
     rules.style.display = 'none';
+    challenges.style.display = 'none';
+
     if (challenges.childElementCount === 0) {
         callApi();
     }
-    challenges.style.display = 'flex';
+    let p = new Promise((resolve, reject) => {
+        progress.classList.remove('reset-progress');
+        progress.textContent = 'Loading';
+
+        myInterval = setInterval(function () {
+            progress.textContent += '.';
+        }, 400);
+
+        setTimeout(() => {
+            clearInterval(myInterval);
+            progress.textContent = '';
+            progress.classList.add('reset-progress');
+            resolve('Success');
+        }, 1500);
+    });
+    p.then(() => {
+        challenges.style.display = 'flex';
+    });
 };
 
 const callApi = () => {
@@ -14,6 +34,15 @@ const callApi = () => {
         .then(function (response) {
             console.log('api called');
             apiCalled = true;
+            const header = document.createElement('header');
+            const headerContent = document.createElement('h3');
+            headerContent.textContent = 'Challenges';
+            header.appendChild(headerContent);
+            challenges.appendChild(header);
+
+            const parent = document.createElement('div');
+            parent.classList.add('challenge-parent');
+
             for (const challenge of response.data) {
                 const div = document.createElement('div');
                 div.classList.add('challenge-box');
@@ -52,7 +81,8 @@ const callApi = () => {
                         div.removeChild(address);
                     }
                 });
-                challenges.appendChild(div);
+                parent.appendChild(div);
+                challenges.appendChild(parent);
             }
         })
         .catch(err => challenges.innerHTML = '<h2>Error retrieving data!</h2>')
