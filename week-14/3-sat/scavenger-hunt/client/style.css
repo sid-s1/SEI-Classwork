@@ -1,5 +1,9 @@
 body {
     background-color: black;
+    background-image: url('https://i.ibb.co/FWsMcDN/yharnam.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
     font-family: 'Mystery Quest','cursive';
     color: gold;
     font-size: 1.5vw;
@@ -9,6 +13,7 @@ body {
     border-radius: 3rem;
     box-shadow: 0.25rem 0.25rem 14px 3px gold;
     color: gold;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -108,6 +113,7 @@ h1,ul {
     cursor: pointer;
     transition: linear 1.5s;
     color: rgba(255, 217, 0, 0.75);
+    background-color: black;
 }
 .challenge-box:hover {
     background-color: rgb(226, 88, 34);
@@ -120,6 +126,7 @@ h1,ul {
     transition: linear 1.5s;
     box-shadow: 0.1rem 0.1rem 2rem 0.3rem rgb(226, 88, 34);
     color: gold;
+    transform: scale(1.03);
 }
 .challenge-box:active {
     transform: translate(0.1rem, 0.1rem) scale(1);
