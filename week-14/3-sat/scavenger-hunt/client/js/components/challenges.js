@@ -1,11 +1,12 @@
 const challenges = document.getElementById('challenges');
 
 const renderChallenges = () => {
+    welcome.style.display = 'none';
     rules.style.display = 'none';
     if (challenges.childElementCount === 0) {
         callApi();
     }
-    challenges.style.display = 'block';
+    challenges.style.display = 'flex';
 };
 
 const callApi = () => {
@@ -16,17 +17,14 @@ const callApi = () => {
             for (const challenge of response.data) {
                 const div = document.createElement('div');
                 div.classList.add('challenge-box');
-                const name = document.createElement('button');
                 const description = document.createElement('p');
                 const address = document.createElement('p');
 
-                name.textContent = challenge.name;
-                name.classList.add('challenge-btn');
+                div.textContent = challenge.name;
                 const challengeId = challenge.id;
-                div.appendChild(name);
                 let clickState = false;
 
-                name.addEventListener('click', () => {
+                div.addEventListener('click', () => {
                     if (!clickState) {
                         clickState = true;
                         if (description.textContent.length == 0) {

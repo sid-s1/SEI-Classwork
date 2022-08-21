@@ -1,6 +1,8 @@
 body {
     background-color: black;
     font-family: 'Mystery Quest','cursive';
+    color: gold;
+    font-size: 1.5vw;
 }
 #header-nav {
     border: 0.25rem solid gold;
@@ -20,16 +22,17 @@ h1,ul {
     justify-content: space-around;
     align-items: center;
     width: 25%;
-    padding-right: 4rem;
+    padding-right: 5rem;
 }
 .nav-btn {
     font-family: 'Mystery Quest', 'cursive';
+    font-size: 1.65vw;
     width: 15vw;
     height: 5vw;
     margin: 0 1rem;
     border: 0.25rem solid gold;
     border-radius: 3rem;
-    box-shadow: 0.25rem 0.25rem 15px gold;
+    box-shadow: 0.1rem 0.1rem 8px gold;
     color: gold;
     background-color: black;
     display: flex;
@@ -41,6 +44,8 @@ h1,ul {
 .nav-btn:hover {
     color: black;
     background-color: gold;
+    transform: scale(1.1);
+    box-shadow: 0.25rem 0.25rem 15px gold;
 }
 .nav-btn:active {
     color: black;
@@ -48,19 +53,54 @@ h1,ul {
     box-shadow: 0 0;
     transform: translate(0.25rem,0.25rem);
 }
+#welcome > h2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 5rem;
+    letter-spacing: 0.65em;
+    line-height: 2em;
+    font-size: 3vw;
+}
+
+#challenges {
+    display: flex;
+    justify-content: center;
+}
 
 .challenge-box {
+    border: 0.15rem solid rgb(226, 88, 34);
+    border-radius: 3rem;
+    box-shadow: 0.1rem 0.1rem 10px rgb(226, 88, 34);
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
     justify-content: center;
     align-items: center;
-    padding: 2%;
-    border-radius: 2em;
-    margin: 2%;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 2rem;
+    cursor: pointer;
+    transition: linear 0.75s;
 }
-.challenge-btn {
-    border: 0;
-    border-radius: 2em;
-    padding: 2%;
+.challenge-box:hover {
+    background-color: rgb(226, 88, 34);
+    color: black;
+    box-shadow: 0.45rem 0.45rem 15px rgb(226, 88, 34);
+    transform: scale(1.1);
+}
+.challenge-box:active {
+    transform: translate(0.25rem, 0.25rem);
+}
+
+#rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+#rules > header {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    border-bottom: 0.1rem solid gold;
 }
