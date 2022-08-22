@@ -8,10 +8,19 @@ const db = new pg.Pool({
 });
 
 app.use(express.static('client'));
+app.use(express.json());
 
 app.get('/api/challenges', (request, response) => {
     const sql = 'SELECT id,name FROM challenges LIMIT 100';
     db.query(sql).then(result => response.json(result.rows));
+});
+
+app.post('/api/challenges', (request, response) => {
+    const { name, description, address } = request.body;
+    const sql = 'INSERT INTO challenges(name,description,address) VALUES($1,$2,$3)';
+    db.query(sql, [name, description, address])
+        .then(result => result.json({ success: true }))
+        .catch(response.json({ success: false }));
 });
 
 app.get('/api/challenges/:challengeId', (request, response) => {

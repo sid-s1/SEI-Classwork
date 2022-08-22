@@ -1,5 +1,6 @@
 const challenges = document.getElementById('challenges');
 const progress = document.getElementById('progress');
+const navBtns = document.getElementsByClassName('nav-btn');
 
 const renderChallenges = () => {
     welcome.style.display = 'none';
@@ -13,6 +14,10 @@ const renderChallenges = () => {
         progress.classList.remove('reset-progress');
         progress.textContent = 'Loading';
 
+        for (const navBtn of navBtns) {
+            navBtn.disabled = true;
+        }
+
         myInterval = setInterval(function () {
             progress.textContent += '.';
         }, 400);
@@ -25,6 +30,9 @@ const renderChallenges = () => {
         }, 1500);
     });
     p.then(() => {
+        for (const navBtn of navBtns) {
+            navBtn.disabled = false;
+        }
         challenges.style.display = 'flex';
         setTimeout(() => {
             const boxes = document.getElementsByClassName('challenge-box');

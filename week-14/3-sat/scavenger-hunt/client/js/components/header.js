@@ -6,6 +6,7 @@ const renderHeader = () => {
     <ul id="navlist">
         <li onClick="renderChallenges()"><button class="nav-btn">Challenges</button></li>
         <li onClick="renderRules()"><button class="nav-btn">Rules</button></li>
+        <li onClick="renderNewChallengeForm()"><button class="nav-btn">Add challenge</button></li>
     </ul>
     `;
     welcome.innerHTML = `

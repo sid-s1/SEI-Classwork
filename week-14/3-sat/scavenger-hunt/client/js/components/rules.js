@@ -9,6 +9,10 @@ const renderRules = () => {
         progress.classList.remove('reset-progress');
         progress.textContent = 'Loading';
 
+        for (const navBtn of navBtns) {
+            navBtn.disabled = true;
+        }
+
         myInterval = setInterval(function () {
             progress.textContent += '.';
         }, 400);
@@ -21,6 +25,10 @@ const renderRules = () => {
         }, 1500);
     });
     p.then(() => {
+        for (const navBtn of navBtns) {
+            navBtn.disabled = false;
+        }
+
         rules.style.display = 'flex';
     });
     rules.innerHTML = `
