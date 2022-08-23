@@ -3,11 +3,10 @@ const progress = document.getElementById('progress');
 const navBtns = document.getElementsByClassName('nav-btn');
 
 const renderChallenges = () => {
+    page.style.display = 'none';
     welcome.style.display = 'none';
-    rules.style.display = 'none';
-    challenges.style.display = 'none';
-
-    if (challenges.childElementCount === 0) {
+    page.innerHTML = '';
+    if (page.childElementCount === 0) {
         callApi();
     }
     let p = new Promise((resolve, reject) => {
@@ -33,7 +32,7 @@ const renderChallenges = () => {
         for (const navBtn of navBtns) {
             navBtn.disabled = false;
         }
-        challenges.style.display = 'flex';
+        page.style.display = 'flex';
         setTimeout(() => {
             const boxes = document.getElementsByClassName('challenge-box');
             for (const box of boxes) {
@@ -57,7 +56,6 @@ const callApi = () => {
             const headerContent = document.createElement('h3');
             headerContent.textContent = 'Challenges';
             header.appendChild(headerContent);
-            challenges.appendChild(header);
 
             const parent = document.createElement('div');
             parent.classList.add('challenge-parent');
@@ -101,8 +99,8 @@ const callApi = () => {
                     }
                 });
                 parent.appendChild(div);
-                challenges.appendChild(parent);
+                page.replaceChildren(header, parent);
             }
         })
-        .catch(err => challenges.innerHTML = '<h2>Error retrieving data!</h2>')
+        .catch(err => page.innerHTML = '<h2>Error retrieving data!</h2>')
 };

@@ -1,6 +1,8 @@
 const renderHeader = () => {
     const header = document.getElementById('header-nav');
     const welcome = document.getElementById('welcome');
+    const page = document.getElementById('page');
+
     header.innerHTML = `
     <h1>Scavenger Hunt | Yharnam Edition</h1>
     <ul id="navlist">

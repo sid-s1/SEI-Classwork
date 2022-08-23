@@ -2,8 +2,7 @@ const rules = document.getElementById('rules');
 
 const renderRules = () => {
     welcome.style.display = 'none';
-    challenges.style.display = 'none';
-    rules.style.display = 'none';
+    page.style.display = 'none';
 
     let p = new Promise((resolve, reject) => {
         progress.classList.remove('reset-progress');
@@ -28,10 +27,10 @@ const renderRules = () => {
         for (const navBtn of navBtns) {
             navBtn.disabled = false;
         }
-
-        rules.style.display = 'flex';
+        page.style.display = 'flex';
     });
-    rules.innerHTML = `
+
+    page.innerHTML = `
     <header>
         <h3>Rules</h3>
     </header>
