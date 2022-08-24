@@ -6,7 +6,7 @@ body {
     height: 100vh;
     font-family: 'Mystery Quest','cursive';
     color: gold;
-    font-size: 1.5vw;
+    font-size: 1.3vw;
 }
 #header-nav {
     border: 0.25rem solid gold;
@@ -99,11 +99,12 @@ h1,ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    margin: 0.5rem 0;
 }
 
 .challenge-parent {
     display: flex;
+    flex-wrap: wrap;
     margin: 3rem 0;
 }
 
@@ -117,7 +118,7 @@ h1,ul {
     align-items: center;
     text-align: center;
     padding: 1.5rem;
-    margin: 0 2rem;
+    margin: 1rem 2rem;
     cursor: pointer;
     transition: linear 1.5s;
     color: rgba(255, 217, 0, 0.75);
@@ -140,7 +141,7 @@ h1,ul {
     transform: translate(0.1rem, 0.1rem) scale(1);
 }
 
-#page > header {
+#page > header, #page > form > header {
     display: flex;
     justify-content: center;
     width: 95%;
@@ -149,12 +150,37 @@ h1,ul {
     text-shadow: 0.2rem 0.2rem rgba(255, 217, 0, 0.348);
     letter-spacing: 0.3em;
 }
-#page > header {
+
+form {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.field-container {
+    display: flex;
     width: 50%;
-    border-bottom: 0.1rem solid gold;
-    font-size: 2vw;
-    letter-spacing: 0.3em;
-    text-shadow: 0.2rem 0.2rem rgba(255, 217, 0, 0.348);
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+    font-size: 1.5vw;
+}
+.field-container-one {
+    margin-top: 2rem;
+}
+.field-container-three {
+    margin-bottom: 2rem;
+}
+input {
+    border: 0.15rem inset gold;
+    border-radius: 2em;
+    width: 50%;
+    opacity: 0.8;
+    padding: 1rem;
+    transform: scale(1.0);
+    transition: transform 0.5s;
+}
+.expanded-input {
+    transform: scale(1.5);
+    transition: transform 0.5s;
 }

@@ -19,7 +19,7 @@ app.post('/api/challenges', (request, response) => {
     const { name, description, address } = request.body;
     const sql = 'INSERT INTO challenges(name,description,address) VALUES($1,$2,$3)';
     db.query(sql, [name, description, address])
-        .then(result => result.json({ success: true }))
+        .then()
         .catch(response.json({ success: false }));
 });
 
