@@ -102,6 +102,12 @@ h1,ul {
     margin: 0.5rem 0;
 }
 
+.challenge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .challenge-parent {
     display: flex;
     flex-wrap: wrap;
@@ -131,6 +137,16 @@ h1,ul {
     transform: scale(1.1);
     transition: linear 0.2s;
 }
+.modify-btn {
+    background-color: black;
+    color: rgb(226, 88, 34);
+    opacity: 0.7;
+    cursor: no-drop;
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    border-radius: 2em;
+    border: 0;
+}
 .pulse {
     transition: linear 1.5s;
     box-shadow: 0.1rem 0.1rem 2rem 0.3rem rgb(226, 88, 34);
@@ -139,6 +155,25 @@ h1,ul {
 }
 .challenge-box:active {
     transform: translate(0.1rem, 0.1rem) scale(1);
+}
+
+.edit-btn {
+    cursor: pointer;
+    width: 30%;
+    border: 2px outset rgb(226, 88, 34);
+    color: gold;
+    transition: linear 0.2s;
+}
+.edit-btn:hover {
+    background-color: rgb(248, 0, 0);
+    color: black;
+    box-shadow: 0.25rem 0.25rem 15px rgb(226, 88, 34);
+    transform: scale(1.1);
+    transition: linear 0.2s;
+}
+.edit-btn:active {
+    transform: scale(1);
+    box-shadow: 0 0;
 }
 
 #page > header, #page > form > header {

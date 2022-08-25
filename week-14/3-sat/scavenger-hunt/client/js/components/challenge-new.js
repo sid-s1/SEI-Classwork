@@ -66,12 +66,23 @@ const renderNewChallengeForm = () => {
             axios.post('/api/challenges', data)
                 .then(
                     response => {
-                        alert('Challenge accepted')
                         renderChallenges();
                     }
                 )
                 .catch(
-                    error => alert(error.message)
+                    error => {
+                        const errorMessageMap = {
+                            NAME_REQUIRED: 'Name is a required field!',
+                            ADDRESS_REQUIRED: 'Address is a required field!',
+                            DESCRIPTION_REQUIRED: 'Description is a required field!'
+                        };
+                        if (error.response.status === 500) {
+                            alert('Unknown error! Please try again later!')
+                        }
+                        else {
+                            alert(errorMessageMap[error.response.data.code])
+                        }
+                    }
                 );
         });
 
