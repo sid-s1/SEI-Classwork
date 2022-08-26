@@ -2,6 +2,22 @@ const challenges = document.getElementById('challenges');
 const progress = document.getElementById('progress');
 const navBtns = document.getElementsByClassName('nav-btn');
 
+const deactivateEditBtns = (id) => {
+    const editBtns = document.querySelectorAll('.edit-btn');
+    for (const editBtn of editBtns) {
+        if (editBtn.id !== id) {
+            editBtn.disabled = true;
+        }
+    }
+};
+
+const reactivateEditBtns = () => {
+    const editBtns = document.querySelectorAll('.edit-btn');
+    for (const editBtn of editBtns) {
+        editBtn.disabled = false;
+    }
+};
+
 const renderChallenges = () => {
     page.style.display = 'none';
     welcome.style.display = 'none';
@@ -89,24 +105,48 @@ const callApi = () => {
                         })
                 });
 
+                const formDescription = document.createElement('form');
+                const formAddress = document.createElement('form');
+                formDescription.classList.add('edit-forms');
+                formAddress.classList.add('edit-forms');
                 const descriptionInput = document.createElement('textarea');
                 const addressInput = document.createElement('textarea');
 
                 editBtn.addEventListener('click', () => {
-                    if (document.querySelector('.challenge-box > .editable-challenge-details')) {
-                        div.replaceChildren(challengeHeader, deleteBtn);
+                    if (document.querySelector('.challenge-container > .edit-forms')) {
+                        divContainer.removeChild(formDescription);
+                        divContainer.removeChild(formAddress);
+                        reactivateEditBtns();
                     }
                     else {
+                        deactivateEditBtns(editBtn.id);
                         axios.get(`/api/challenges/${challengeId}`)
-                            .then(function (res) {
+                            .then((res) => {
                                 descriptionInput.value = res.data[0].description;
                                 addressInput.value = res.data[0].address;
+
                                 descriptionInput.classList.add('editable-challenge-details');
                                 addressInput.classList.add('editable-challenge-details');
-                                div.replaceChildren(challengeHeader, deleteBtn, descriptionInput, addressInput);
+
+                                formDescription.appendChild(descriptionInput);
+                                formAddress.appendChild(addressInput);
+
+                                divContainer.append(formDescription, formAddress);
                             })
                     }
                 });
+
+                const editableDetails = document.querySelectorAll('.editable-challenge-details');
+                for (const detailField of editableDetails) {
+                    detailField.addEventListener('focus', () => {
+                        if (detailField.value.length >= 1) {
+                            axios.patch(`/api/challenges/${challengeId}`)
+                                .then((res) => {
+
+                                });
+                        }
+                    });
+                }
 
                 const description = document.createElement('p');
                 const address = document.createElement('p');

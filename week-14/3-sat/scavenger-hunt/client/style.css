@@ -53,13 +53,13 @@ h1,ul {
     cursor: pointer;
     transition: linear 0.25s;
 }
-.nav-btn:hover {
+.nav-btn:hover:enabled {
     color: black;
     background-color: gold;
     transform: scale(1.1);
     box-shadow: 0.25rem 0.25rem 15px gold;
 }
-.nav-btn:active {
+.nav-btn:active:enabled {
     color: black;
     background-color: gold;
     box-shadow: 0 0;
@@ -164,16 +164,31 @@ h1,ul {
     color: gold;
     transition: linear 0.2s;
 }
-.edit-btn:hover {
+.edit-btn:hover:enabled {
     background-color: rgb(248, 0, 0);
     color: black;
     box-shadow: 0.25rem 0.25rem 15px rgb(226, 88, 34);
     transform: scale(1.1);
     transition: linear 0.2s;
 }
-.edit-btn:active {
+.edit-btn:active:enabled {
     transform: scale(1);
     box-shadow: 0 0;
+}
+.edit-btn:disabled {
+    box-shadow: 0 0;
+    background-color: grey;
+    color: black;
+    cursor: auto;
+}
+textarea {
+    margin: 1em 0;
+    border-radius: 2em;
+    outline: 0;
+    width: 80%;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 1vw;
 }
 
 #page > header, #page > form > header {
