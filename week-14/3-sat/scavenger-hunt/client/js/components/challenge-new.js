@@ -57,6 +57,10 @@ const renderNewChallengeForm = () => {
             event.preventDefault();
             document.getElementById('add-challenge-btn').disabled = 'true';
 
+            for (const navBtn of navBtns) {
+                navBtn.disabled = 'true';
+            }
+
             const formData = new FormData(form);
             const data = {
                 name: formData.get('name'),
