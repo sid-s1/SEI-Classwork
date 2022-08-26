@@ -66,7 +66,9 @@ const renderNewChallengeForm = () => {
             axios.post('/api/challenges', data)
                 .then(
                     (response) => {
-                        renderChallenges();
+                        setTimeout(() => {
+                            renderChallenges();
+                        }, 1500);
                     }
                 )
                 .catch(
