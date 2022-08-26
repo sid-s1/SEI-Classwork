@@ -65,7 +65,7 @@ const renderNewChallengeForm = () => {
             };
             axios.post('/api/challenges', data)
                 .then(
-                    response => {
+                    (response) => {
                         renderChallenges();
                     }
                 )

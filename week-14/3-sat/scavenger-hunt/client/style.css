@@ -222,6 +222,7 @@ form {
     margin-bottom: 2rem;
 }
 input {
+    outline: 0;
     border: 0.15rem inset gold;
     border-radius: 2em;
     width: 50%;

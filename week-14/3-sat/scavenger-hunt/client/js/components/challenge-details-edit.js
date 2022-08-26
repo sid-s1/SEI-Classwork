@@ -1,5 +1,6 @@
 const editDetails = (challengeId) => {
     const editableDetails = document.querySelectorAll('.editable-challenge-details');
+    // text areas havent been created by the time we are checking these focus and blurs on them; so they only work when edit button is clicked twice
     for (const detailField of editableDetails) {
         detailField.addEventListener('focus', () => {
             if (detailField.value.length >= 1) {

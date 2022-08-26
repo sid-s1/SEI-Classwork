@@ -99,7 +99,7 @@ const callApi = () => {
 
                 deleteBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    div.remove();
+                    divContainer.remove();
                     axios.delete(`/api/challenges/${challengeId}`)
                         .then((response) => {
                         })
@@ -158,7 +158,6 @@ const callApi = () => {
                                 reactivateEditBtns();
                                 div.parentNode.replaceChildren(div, div.nextElementSibling);
                             })
-                        console.log('here');
                         // div.replaceChildren(challengeHeader, deleteBtn);
 
                     }
