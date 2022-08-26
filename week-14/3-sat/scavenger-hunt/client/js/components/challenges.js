@@ -113,12 +113,16 @@ const callApi = () => {
                 const addressInput = document.createElement('textarea');
 
                 editBtn.addEventListener('click', () => {
+                    editDetails(challengeId);
                     if (document.querySelector('.challenge-container > .edit-forms')) {
                         divContainer.removeChild(formDescription);
                         divContainer.removeChild(formAddress);
                         reactivateEditBtns();
                     }
                     else {
+                        if (document.querySelector('.challenge-box > .challenge-details')) {
+                            div.replaceChildren(challengeHeader, deleteBtn);
+                        }
                         deactivateEditBtns(editBtn.id);
                         axios.get(`/api/challenges/${challengeId}`)
                             .then((res) => {
@@ -126,7 +130,9 @@ const callApi = () => {
                                 addressInput.value = res.data[0].address;
 
                                 descriptionInput.classList.add('editable-challenge-details');
+                                descriptionInput.classList.add('description-edit');
                                 addressInput.classList.add('editable-challenge-details');
+                                addressInput.classList.add('address-edit');
 
                                 formDescription.appendChild(descriptionInput);
                                 formAddress.appendChild(addressInput);
@@ -136,25 +142,25 @@ const callApi = () => {
                     }
                 });
 
-                const editableDetails = document.querySelectorAll('.editable-challenge-details');
-                for (const detailField of editableDetails) {
-                    detailField.addEventListener('focus', () => {
-                        if (detailField.value.length >= 1) {
-                            axios.patch(`/api/challenges/${challengeId}`)
-                                .then((res) => {
-
-                                });
-                        }
-                    });
-                }
-
                 const description = document.createElement('p');
                 const address = document.createElement('p');
                 div.append(deleteBtn);
 
                 div.addEventListener('click', () => {
-                    if (document.querySelector('.challenge-box > .editable-challenge-details')) {
-                        div.replaceChildren(challengeHeader, deleteBtn);
+                    if (document.querySelector('.challenge-container > .edit-forms')) {
+                        axios.get(`/api/challenges/${challengeId}`)
+                            .then(function (response) {
+                                description.textContent = response.data[0].description;
+                                address.textContent = response.data[0].address;
+                                description.classList.add('challenge-details');
+                                address.classList.add('challenge-details');
+                                div.replaceChildren(challengeHeader, deleteBtn, description, address);
+                                reactivateEditBtns();
+                                div.parentNode.replaceChildren(div, div.nextElementSibling);
+                            })
+                        console.log('here');
+                        // div.replaceChildren(challengeHeader, deleteBtn);
+
                     }
                     else {
                         if (document.querySelector('.challenge-box > .challenge-details')) {
@@ -177,6 +183,8 @@ const callApi = () => {
                 divContainer.appendChild(editBtn);
                 parent.appendChild(divContainer);
                 page.replaceChildren(header, parent);
+
+
             }
         })
         .catch(err => page.innerHTML = '<h2>Error retrieving data!</h2>')
