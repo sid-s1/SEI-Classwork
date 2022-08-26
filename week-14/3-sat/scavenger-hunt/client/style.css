@@ -224,11 +224,17 @@ form {
 .field-container-three {
     margin-bottom: 2rem;
 }
+.input-prompt-containers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+}
 input {
     outline: 0;
     border: 0.15rem inset gold;
     border-radius: 2em;
-    width: 50%;
+    width: 18rem;
     opacity: 0.8;
     padding: 1rem;
     transform: scale(1.0);

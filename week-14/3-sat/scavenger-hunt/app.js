@@ -34,12 +34,28 @@ app.post('/api/challenges', (request, response) => {
         response.status(400).json({ code: 'ADDRESS_REQUIRED' })
     }
     else {
-        const sql = 'INSERT INTO challenges(name,description,address) VALUES($1,$2,$3)';
-        db.query(sql, [name, description, address])
-            .then(res => response.json({}))
-            .catch((error) => {
-                response.status(500).json({})
-            });
+        const checkChallenge = 'SELECT * FROM challenges WHERE name=$1';
+        db.query(checkChallenge, [name])
+            .then(res => {
+                if (res.rowCount > 0) {
+                    response.status(400).json({ code: 'NAME_EXISTS' })
+                }
+                else {
+                    const checkAddress = 'SELECT * FROM challenges WHERE address=$1';
+                    db.query(checkAddress, [address])
+                        .then((res) => {
+                            if (res.rowCount > 0) {
+                                response.status(400).json({ code: 'ADDRESS_EXISTS' })
+                            }
+                            else {
+                                const sql = 'INSERT INTO challenges(name,description,address) VALUES($1,$2,$3)';
+                                db.query(sql, [name, description, address])
+                                    .then(res => response.json({}))
+                                    .catch((error) => response.status(500).json({}))
+                            }
+                        })
+                }
+            })
     }
 });
 

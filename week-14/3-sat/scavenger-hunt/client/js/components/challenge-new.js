@@ -33,19 +33,25 @@ const renderNewChallengeForm = () => {
                 <h3>Add a challenge</h3>
             </header>
 
-            <div class="field-container field-container-one">
+            <div class="field-container field-container-one new-NAME">
                 <label for="name">Name</label>
-                <input type="text" name="name">
+                <div class="input-prompt-containers">
+                    <input type="text" name="name">
+                </div>
             </div>
 
-            <div class="field-container">
+            <div class="field-container new-DESCRIPTION">
                 <label for="description">Description</label>
-                <input type="text" name="description">
+                <div class="input-prompt-containers">
+                    <input type="text" name="description">
+                </div>
             </div>
 
-            <div class="field-container field-container-three">
+            <div class="field-container field-container-three new-ADDRESS">
                 <label for="address">Address</label>
-                <input type="text" name="address">
+                <div class="input-prompt-containers">
+                    <input type="text" name="address">
+                </div>
             </div>
 
             <button class="nav-btn" id="add-challenge-btn">Save</button>
@@ -70,9 +76,10 @@ const renderNewChallengeForm = () => {
             axios.post('/api/challenges', data)
                 .then(
                     (response) => {
+                        alert('Challenge added!');
                         setTimeout(() => {
                             renderChallenges();
-                        }, 1500);
+                        }, 1000);
                     }
                 )
                 .catch(
@@ -80,13 +87,25 @@ const renderNewChallengeForm = () => {
                         const errorMessageMap = {
                             NAME_REQUIRED: 'Name is a required field!',
                             ADDRESS_REQUIRED: 'Address is a required field!',
-                            DESCRIPTION_REQUIRED: 'Description is a required field!'
+                            DESCRIPTION_REQUIRED: 'Description is a required field!',
+                            NAME_EXISTS: 'Challenge already exists!',
+                            ADDRESS_EXISTS: 'Address already exists!'
                         };
                         if (error.response.status === 500) {
-                            alert('Unknown error! Please try again later!')
+                            alert('Unknown error! Please try again later!');
                         }
                         else {
-                            alert(errorMessageMap[error.response.data.code])
+                            const prompt = document.createElement('p');
+                            prompt.textContent = errorMessageMap[error.response.data.code];
+                            const arr = error.response.data.code.split('_');
+                            const fieldToAppend = document.querySelector(`.new-${arr[0]} > .input-prompt-containers`);
+                            fieldToAppend.appendChild(prompt);
+                            document.getElementById('add-challenge-btn').disabled = false;
+                            for (const navBtn of navBtns) {
+                                navBtn.disabled = false;
+                            }
+                            // alert(errorMessageMap[error.response.data.code]);
+                            // renderNewChallengeForm();
                         }
                     }
                 );
