@@ -12,6 +12,7 @@ const db = new pg.Pool({
 
 app.use(express.static('client'));
 app.use(express.json());
+
 app.use(
     expressSession({
         store: new pgSession({
@@ -143,6 +144,41 @@ app.post('/api/session', (request, response) => {
                 return response.json({ message: 'INCORRECT' })
             }
         })
+});
+
+// app.delete('/api/session/:username', (request, response) => {
+//     let sidToRemove = '';
+//     // console.log(request.body);
+//     const sql = 'SELECT sid,sess FROM session';
+//     db.query(sql)
+//         .then((dbRes) => {
+//             const username = request.params.username;
+//             console.log(username);
+//             const result = dbRes.rows;
+//             for (const entry of result) {
+//                 console.log(username, entry.sess.username);
+//                 if (entry.sess.username === username) {
+//                     console.log(entry.sess.username);
+//                     sidToRemove = entry.sid;
+//                     console.log(sidToRemove);
+//                     break;
+//                 }
+//             }
+//         })
+//         .then(() => {
+//             console.log('here', sidToRemove);
+//             request.session.username = '';
+//             const sqlToDelete = 'DELETE FROM session WHERE sid=$1';
+//             db.query(sqlToDelete, [sidToRemove])
+//                 .then(dbRes => response.json({}))
+//                 .catch(err => response.json({}))
+//         })
+//         .catch(err => response.json({}))
+// });
+
+app.delete('/api/session', (request, response) => {
+    request.session.destroy();
+    response.json({});
 });
 
 app.get('/api/session', (request, response) => {

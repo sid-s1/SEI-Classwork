@@ -38,15 +38,32 @@ const renderLogin = () => {
                     console.log(messageMap[response.data.message]);
                 }
                 else {
-                    renderHeader();
+                    renderUserHeader();
                 }
             })
             .catch((error) => {
             });
     });
-
-
-
     page.replaceChildren(loginForm);
     page.style.display = 'flex';
+};
+
+const logoutAction = () => {
+    axios.get('/api/session')
+        .then((response) => {
+            let name = '';
+            if ('username' in response.data) {
+                name = response.data.username;
+                const data = {
+                    username: name
+                };
+                axios.delete('/api/session/')
+                    .then((res) => {
+                        renderHeader();
+                    })
+            }
+            else {
+                // post message in a modal?
+            }
+        })
 };
