@@ -13,6 +13,8 @@ npm init -y
 npm install express --save-dev
 npm install nodemon --save-dev
 npm install pg
+npm install --save-dev bcrypt
+npm install dotenv express-session connect-pg-simple
 ```
 
 ## Setup Database

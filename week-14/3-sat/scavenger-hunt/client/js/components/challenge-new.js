@@ -36,28 +36,28 @@ const renderNewChallengeForm = () => {
             <div class="field-container field-container-one new-NAME">
                 <label for="name">Name</label>
                 <div class="input-prompt-containers">
-                    <input type="text" name="name">
+                    <input type="text" name="name" class="newChallengeInputs">
                 </div>
             </div>
 
             <div class="field-container new-DESCRIPTION">
                 <label for="description">Description</label>
                 <div class="input-prompt-containers">
-                    <input type="text" name="description">
+                    <input type="text" name="description" class="newChallengeInputs">
                 </div>
             </div>
 
             <div class="field-container field-container-three new-ADDRESS">
                 <label for="address">Address</label>
                 <div class="input-prompt-containers">
-                    <input type="text" name="address">
+                    <input type="text" name="address" class="newChallengeInputs">
                 </div>
             </div>
 
             <button class="nav-btn" id="add-challenge-btn">Save</button>
         `;
-
-
+        const promptContainer = document.createElement('div');
+        const emptyPromptContainer = () => promptContainer.innerHTML = '';
 
         form.addEventListener('submit', event => {
             event.preventDefault();
@@ -76,6 +76,17 @@ const renderNewChallengeForm = () => {
             axios.post('/api/challenges', data)
                 .then(
                     (response) => {
+                        console.log('where i should be');
+                        for (const input of document.getElementsByClassName('newChallengeInputs')) {
+                            input.value = '';
+                        }
+                        // if (promptContainer.hasChildNodes()) {
+                        //     promptContainer.innerHTML = '';
+                        // }
+
+                        // left side below equates to boolean - if that is true the second part on the right executes
+                        promptContainer.hasChildNodes() && emptyPromptContainer();
+
                         alert('Challenge added!');
                         setTimeout(() => {
                             renderChallenges();
@@ -84,6 +95,7 @@ const renderNewChallengeForm = () => {
                 )
                 .catch(
                     error => {
+                        console.log('where i should not be');
                         const errorMessageMap = {
                             NAME_REQUIRED: 'Name is a required field!',
                             ADDRESS_REQUIRED: 'Address is a required field!',
@@ -91,21 +103,21 @@ const renderNewChallengeForm = () => {
                             NAME_EXISTS: 'Challenge already exists!',
                             ADDRESS_EXISTS: 'Address already exists!'
                         };
-                        if (error.response.status === 500) {
+                        if (error && error.response.status === 500) {
                             alert('Unknown error! Please try again later!');
                         }
                         else {
                             const prompt = document.createElement('p');
+                            promptContainer.appendChild(prompt);
                             prompt.textContent = errorMessageMap[error.response.data.code];
                             const arr = error.response.data.code.split('_');
                             const fieldToAppend = document.querySelector(`.new-${arr[0]} > .input-prompt-containers`);
-                            fieldToAppend.appendChild(prompt);
+                            promptContainer.replaceChildren(prompt);
+                            fieldToAppend.appendChild(promptContainer);
                             document.getElementById('add-challenge-btn').disabled = false;
                             for (const navBtn of navBtns) {
                                 navBtn.disabled = false;
                             }
-                            // alert(errorMessageMap[error.response.data.code]);
-                            // renderNewChallengeForm();
                         }
                     }
                 );
