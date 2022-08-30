@@ -1,14 +1,12 @@
 const { response } = require('express');
 const e = require('express');
 const express = require('express');
-const pg = require('pg');
 const { expressSession, pgSession } = require('./session');
+const userController = require('./controller/user-controller');
+const db = require('./db/db');
 
 const app = express();
 const port = 3000;
-const db = new pg.Pool({
-    database: 'scavenger_hunt'
-});
 
 app.use(express.static('client'));
 app.use(express.json());
@@ -22,6 +20,8 @@ app.use(
         secret: process.env.EXPRESS_SESSION_SECRET_KEY,
     })
 );
+
+app.use('/', userController)
 
 app.get('/api/challenges', (request, response) => {
     const sql = 'SELECT id,name FROM challenges LIMIT 100';
@@ -101,94 +101,6 @@ app.delete('/api/challenges/:challengeId', (request, response) => {
     const id = request.params.challengeId;
     const sql = 'DELETE FROM challenges WHERE id = $1';
     db.query(sql, [id]).then(dbResponse => response.status(200).json({ message: 'Deleted' }))
-});
-
-app.post('/api/signup', (request, response) => {
-    const { username, email, password } = request.body;
-    const sql = 'SELECT * FROM users';
-    db.query(sql)
-        .then((dbRes) => {
-            for (const result of dbRes.rows) {
-                if (result.email === email) {
-                    return response.json({ message: 'EMAIL_EXISTS' })
-                }
-                else if (result.username === username) {
-                    return response.json({ message: 'USERNAME_EXISTS' })
-                }
-            }
-            const insertSql = 'INSERT INTO users(username,email,password) VALUES($1,$2,$3)';
-            db.query(insertSql, [username, email, password])
-                .then((dbRes) => {
-                    response.json({ message: 'Successfully signed up!' })
-                })
-                .catch((error) => response.json({ message: '' }))
-        })
-        .catch((err) => { })
-});
-
-app.post('/api/session', (request, response) => {
-    const { username, password } = request.body;
-    const checkUsername = 'SELECT * FROM users WHERE username=$1';
-    db.query(checkUsername, [username])
-        .then((dbRes) => {
-            if (dbRes.rowCount > 0) {
-                if (dbRes.rows[0].password === password) {
-                    request.session.username = username;
-                    return response.json({})
-                }
-                else {
-                    return response.json({ message: 'INCORRECT' })
-                }
-            }
-            else {
-                return response.json({ message: 'INCORRECT' })
-            }
-        })
-});
-
-// app.delete('/api/session/:username', (request, response) => {
-//     let sidToRemove = '';
-//     // console.log(request.body);
-//     const sql = 'SELECT sid,sess FROM session';
-//     db.query(sql)
-//         .then((dbRes) => {
-//             const username = request.params.username;
-//             console.log(username);
-//             const result = dbRes.rows;
-//             for (const entry of result) {
-//                 console.log(username, entry.sess.username);
-//                 if (entry.sess.username === username) {
-//                     console.log(entry.sess.username);
-//                     sidToRemove = entry.sid;
-//                     console.log(sidToRemove);
-//                     break;
-//                 }
-//             }
-//         })
-//         .then(() => {
-//             console.log('here', sidToRemove);
-//             request.session.username = '';
-//             const sqlToDelete = 'DELETE FROM session WHERE sid=$1';
-//             db.query(sqlToDelete, [sidToRemove])
-//                 .then(dbRes => response.json({}))
-//                 .catch(err => response.json({}))
-//         })
-//         .catch(err => response.json({}))
-// });
-
-app.delete('/api/session', (request, response) => {
-    request.session.destroy();
-    response.json({});
-});
-
-app.get('/api/session', (request, response) => {
-    const username = request.session.username;
-    if (!username) {
-        return response.json({ message: 'Not logged in!' })
-    }
-    else {
-        return response.json({ username: username })
-    }
 });
 
 app.listen(port, () => {

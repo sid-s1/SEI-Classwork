@@ -1,6 +1,7 @@
 const challenges = document.getElementById('challenges');
 const progress = document.getElementById('progress');
 const navBtns = document.getElementsByClassName('nav-btn');
+let loggedIn = false;
 
 const deactivateEditBtns = (id) => {
     const editBtns = document.querySelectorAll('.edit-btn');
@@ -22,45 +23,51 @@ const renderChallenges = () => {
     page.style.display = 'none';
     welcome.style.display = 'none';
     page.innerHTML = '';
-    if (page.childElementCount === 0) {
-        callApi();
-    }
-    let p = new Promise((resolve, reject) => {
-        progress.classList.remove('reset-progress');
-        progress.textContent = 'Loading';
-
-        for (const navBtn of navBtns) {
-            navBtn.disabled = true;
-        }
-
-        myInterval = setInterval(function () {
-            progress.textContent += '.';
-        }, 400);
-
-        setTimeout(() => {
-            clearInterval(myInterval);
-            progress.textContent = '';
-            progress.classList.add('reset-progress');
-            resolve('Success');
-        }, 1500);
-    });
-    p.then(() => {
-        for (const navBtn of navBtns) {
-            navBtn.disabled = false;
-        }
-        page.style.display = 'flex';
-        setTimeout(() => {
-            const boxes = document.getElementsByClassName('challenge-box');
-            for (const box of boxes) {
-                setInterval(() => {
-                    box.classList.add('pulse');
-                }, 1500);
-                setInterval(() => {
-                    box.classList.remove('pulse');
-                }, 3000);
+    axios.get('/api/session')
+        .then((response) => {
+            if ('username' in response.data) {
+                loggedIn = true;
             }
-        }, 100);
-    });
+            if (page.childElementCount === 0) {
+                callApi();
+            }
+            let p = new Promise((resolve, reject) => {
+                progress.classList.remove('reset-progress');
+                progress.textContent = 'Loading';
+
+                for (const navBtn of navBtns) {
+                    navBtn.disabled = true;
+                }
+
+                myInterval = setInterval(function () {
+                    progress.textContent += '.';
+                }, 400);
+
+                setTimeout(() => {
+                    clearInterval(myInterval);
+                    progress.textContent = '';
+                    progress.classList.add('reset-progress');
+                    resolve('Success');
+                }, 1500);
+            });
+            p.then(() => {
+                for (const navBtn of navBtns) {
+                    navBtn.disabled = false;
+                }
+                page.style.display = 'flex';
+                setTimeout(() => {
+                    const boxes = document.getElementsByClassName('challenge-box');
+                    for (const box of boxes) {
+                        setInterval(() => {
+                            box.classList.add('pulse');
+                        }, 1500);
+                        setInterval(() => {
+                            box.classList.remove('pulse');
+                        }, 3000);
+                    }
+                }, 100);
+            });
+        })
 };
 
 const callApi = () => {
@@ -121,7 +128,12 @@ const callApi = () => {
                     }
                     else {
                         if (document.querySelector('.challenge-box > .challenge-details')) {
-                            div.replaceChildren(challengeHeader, deleteBtn);
+                            if (loggedIn) {
+                                div.replaceChildren(challengeHeader, deleteBtn);
+                            }
+                            else {
+                                div.replaceChildren(challengeHeader);
+                            }
                         }
                         deactivateEditBtns(editBtn.id);
                         axios.get(`/api/challenges/${challengeId}`)
@@ -144,7 +156,10 @@ const callApi = () => {
 
                 const description = document.createElement('p');
                 const address = document.createElement('p');
-                div.append(deleteBtn);
+
+                if (loggedIn) {
+                    div.append(deleteBtn);
+                }
 
                 div.addEventListener('click', () => {
                     if (document.querySelector('.challenge-container > .edit-forms')) {
@@ -154,16 +169,27 @@ const callApi = () => {
                                 address.textContent = response.data[0].address;
                                 description.classList.add('challenge-details');
                                 address.classList.add('challenge-details');
-                                div.replaceChildren(challengeHeader, deleteBtn, description, address);
-                                reactivateEditBtns();
-                                div.parentNode.replaceChildren(div, div.nextElementSibling);
+
+                                if (loggedIn) {
+                                    div.replaceChildren(challengeHeader, deleteBtn, description, address);
+                                    reactivateEditBtns();
+                                    div.parentNode.replaceChildren(div, div.nextElementSibling);
+                                }
+                                else {
+                                    div.replaceChildren(challengeHeader, description, address);
+                                    div.parentNode.replaceChildren(div);
+                                }
                             })
-                        // div.replaceChildren(challengeHeader, deleteBtn);
 
                     }
                     else {
                         if (document.querySelector('.challenge-box > .challenge-details')) {
-                            div.replaceChildren(challengeHeader, deleteBtn);
+                            if (loggedIn) {
+                                div.replaceChildren(challengeHeader, deleteBtn);
+                            }
+                            else {
+                                div.replaceChildren(challengeHeader);
+                            }
                         }
                         else {
                             axios.get(`/api/challenges/${challengeId}`)
@@ -172,14 +198,24 @@ const callApi = () => {
                                     address.textContent = response.data[0].address;
                                     description.classList.add('challenge-details');
                                     address.classList.add('challenge-details');
-                                    div.replaceChildren(challengeHeader, deleteBtn, description, address);
+
+                                    if (loggedIn) {
+                                        div.replaceChildren(challengeHeader, deleteBtn, description, address);
+                                    }
+                                    else {
+                                        div.replaceChildren(challengeHeader, description, address);
+                                    }
                                 })
                         }
                     }
                 });
 
                 divContainer.appendChild(div);
-                divContainer.appendChild(editBtn);
+
+                if (loggedIn) {
+                    divContainer.appendChild(editBtn);
+                }
+
                 parent.appendChild(divContainer);
                 page.replaceChildren(header, parent);
 
