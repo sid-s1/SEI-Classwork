@@ -37,13 +37,13 @@ app.get('/api/challenges/:challengeId', (request, response) => {
 app.post('/api/challenges', (request, response) => {
     const { name, description, address } = request.body;
     // first ! is not; two !'s will look for truthys or falsys
-    if (!!name.length) {
+    if (name.length <= 1) {
         response.status(400).json({ code: 'NAME_REQUIRED' })
     }
-    else if (!!description.length) {
+    else if (description.length <= 1) {
         response.status(400).json({ code: 'DESCRIPTION_REQUIRED' })
     }
-    else if (!!address.length) {
+    else if (address.length <= 1) {
         response.status(400).json({ code: 'ADDRESS_REQUIRED' })
     }
     // make only one db query - for both name and address check; you can use that to check which one already exists

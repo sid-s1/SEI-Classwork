@@ -76,16 +76,16 @@ const renderNewChallengeForm = () => {
             axios.post('/api/challenges', data)
                 .then(
                     (response) => {
-                        console.log('where i should be');
-                        for (const input of document.getElementsByClassName('newChallengeInputs')) {
-                            input.value = '';
-                        }
-                        // if (promptContainer.hasChildNodes()) {
-                        //     promptContainer.innerHTML = '';
+                        // console.log('where i should be');
+                        // for (const input of document.getElementsByClassName('newChallengeInputs')) {
+                        //     input.value = '';
                         // }
+                        // // if (promptContainer.hasChildNodes()) {
+                        // //     promptContainer.innerHTML = '';
+                        // // }
 
-                        // left side below equates to boolean - if that is true the second part on the right executes
-                        promptContainer.hasChildNodes() && emptyPromptContainer();
+                        // // left side below equates to boolean - if that is true the second part on the right executes
+                        // promptContainer.hasChildNodes() && emptyPromptContainer();
 
                         alert('Challenge added!');
                         setTimeout(() => {
