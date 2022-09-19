@@ -1,0 +1,16 @@
+{
+  "name": "1-mon",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "parcels.js",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.0.3"
+  }
+}
