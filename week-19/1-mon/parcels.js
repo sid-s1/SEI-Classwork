@@ -7,8 +7,18 @@ export class Parcel {
     getLabel() {
         console.log(`Deliver to: ${this.address}, Package contains: ${this.name}`);
     };
+    checkDelivery(progress) {
+        return progress.includes('delivered')
+    }
     processPackage(progress) {
-        this.arr.push(progress);
+        if (!this.arr.includes('Processing Complete. Parcel Delivered.')) {
+            if (!this.checkDelivery(progress)) {
+                this.arr.push(progress);
+            }
+            else {
+                this.arr.push('Processing Complete. Parcel Delivered.');
+            }
+        }
     };
     trackingHistory() {
         return this.arr;
