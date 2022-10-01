@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>This page has no bugs</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        main {
+            width: 600px;
+            margin-top: 30px;
+            font-size: 2rem;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.4em;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <article id="quotes">
+            <h1>Quotes</h1>
+        </article>
+    </main>
+
+    <script>
+        const quotesElement = document.getElementById("quotes");
+        const quote1 = document.createElement("p");
+        const quote2 = document.createElement("p");
+        const quote3 = document.createElement("p");
+
+        let p1 = new Promise((resolve,reject) => {
+            axios.get("https://futuramaapi.herokuapp.com/api/quotes?search=first")
+                .then((response) => {
+                    quote1.textContent = `1. ${response.data[0].quote}`;
+                    resolve();
+                });
+            });
+        let p2 = new Promise((resolve,reject) => {
+            axios.get("https://futuramaapi.herokuapp.com/api/quotes?search=second")
+                .then((response) => {
+                    quote2.textContent = `2. ${response.data[0].quote}`;
+                    resolve();
+                });
+        });
+        let p3 = new Promise((resolve,reject) => {
+            axios.get("https://futuramaapi.herokuapp.com/api/quotes?search=third")
+                .then((response) => {
+                    quote3.textContent = `3. ${response.data[0].quote}`;
+                    resolve();
+                });
+        });
+
+        Promise.all([p1,p2,p3]).then(() => {
+            quotesElement.appendChild(quote1);
+            quotesElement.appendChild(quote2);
+            quotesElement.appendChild(quote3);
+        });
+
+        // solution 2
+        // const asyncFunc = async () => {
+        //     const response1 = await axios.get('bla');
+        //     let quote = document.createElement('p');
+        //     quote.textContent = `1. ${response1.data[0].quote}`;
+        //     quotesElement.appendChild(quote);
+
+        //     const response2 = await axios.get('bla');
+        //     quote = document.createElement('p');
+        //     quote.textContent = `2. ${response2.data[0].quote}`;
+        //     quotesElement.appendChild(quote);
+
+        //     const response3 = await axios.get('bla');
+        //     quote = document.createElement('p');
+        //     quote.textContent = `3. ${response3.data[0].quote}`;
+        //     quotesElement.appendChild(quote);
+        // };
+
+        // asyncFunc();
+
+        //solution 3
+        // Promise.all(urls.map(url => axios.get(url))).then((responses) => {
+        //     for (let i = 0; i < 3; i++) {
+        //         const response = responses[i];
+        //         const quote = document.createElement("p");
+        //         quote.textContent = `${i+1}. ${response.data[0].quote}`;
+        //         quotesElement.appendChild(quote);
+        //     }
+        // });
+
+    </script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-const renderHeader = () => {
+export const renderHeader = () => {
     const header = document.getElementById('header-nav');
     const welcome = document.getElementById('welcome');
     const page = document.getElementById('page');

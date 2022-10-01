@@ -2,3 +2,8 @@ venv/
 downloaded-lab/
 node_modules/
 .env
+favicon.ico
+*.png
+*.json
+*.txt
+*.svg

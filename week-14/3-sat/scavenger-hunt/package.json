@@ -1,18 +1,23 @@
 {
   "name": "scavenger-hunt",
   "version": "1.0.0",
-  "description": "",
+  "description": "A single page application",
   "main": "app.js",
   "scripts": {
     "start": "npx nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/dom": "^8.17.1",
+    "axios": "^0.27.2",
+    "axios-mock-adapter": "^1.21.2",
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
+    "jest": "^29.0.1",
+    "jest-environment-jsdom": "^29.0.1",
     "nodemon": "^2.0.19"
   },
   "dependencies": {

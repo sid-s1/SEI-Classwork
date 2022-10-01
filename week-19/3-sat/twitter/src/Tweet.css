@@ -1,0 +1,7 @@
+input {
+  margin-left: 20px;
+}
+.tweet-item {
+  border-bottom: 1px solid black;
+  margin: 20px;
+}
